@@ -10,138 +10,187 @@
 <div class="container py-5">
   <h2 class="text-center mb-4">Create Pool of Assets</h2>
 
-  <!-- Form Entry Area -->
-  <div class="row g-3 align-items-end mb-4">
+  <!-- Road Info -->
+  <div class="row g-3 mb-4">
     <div class="col-md-6">
       <label class="form-label">Proposed Road Name</label>
-      <input type="text" id="poolRoadName" class="form-control" />
+      <input type="text" name="road_name" class="form-control" />
     </div>
-
     <div class="col-md-6">
       <label class="form-label">Proposed Road Length (km)</label>
-      <input type="number" id="poolRoadLength" step="0.01" class="form-control" />
+      <input type="number" name="road_length" step="0.01" class="form-control" />
     </div>
-
-    <!-- Culverts -->
-    <div class="col-md-4">
-      <label class="form-label">Proposed Culverts</label>
-      <select id="poolCulverts" class="form-select" multiple>
-        <option value="Culvert A">Culvert A</option>
-        <option value="Culvert B">Culvert B</option>
-        <option value="Culvert C">Culvert C</option>
-      </select>
-    </div>
-
-    <!-- Bridges -->
-    <div class="col-md-4">
-      <label class="form-label">Proposed Bridges</label>
-      <select id="poolBridges" class="form-select" multiple>
-        <option value="Bridge A">Bridge A</option>
-        <option value="Bridge B">Bridge B</option>
-        <option value="Bridge C">Bridge C</option>
-      </select>
-    </div>
-
-    <!-- Retaining Walls -->
-    <div class="col-md-4">
-      <label class="form-label">Proposed Retaining Walls</label>
-      <select id="poolWalls" class="form-select" multiple>
-        <option value="Wall A">Wall A</option>
-        <option value="Wall B">Wall B</option>
-        <option value="Wall C">Wall C</option>
-      </select>
-    </div>
-
-    <!-- Add Button -->
-    <div class="col-md-3">
-      <button type="button" id="addToPoolBtn" class="btn btn-success w-100 mt-2">➕ Add to Pool</button>
+    <div class="col-md-6">
+      <label class="form-label">Upload Shapefile (.shp)</label>
+      <input type="file" name="shapefile" accept=".shp" class="form-control" />
     </div>
   </div>
 
-  <!-- Dynamic Pool Table -->
-  <div class="table-responsive mb-4">
-    <table class="table table-bordered" id="poolAssetTable">
-      <thead class="table-light">
-        <tr>
-          <th>Road</th>
-          <th>Length (km)</th>
-          <th>Culverts</th>
-          <th>Bridges</th>
-          <th>Walls</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- rows added dynamically -->
-      </tbody>
-    </table>
+  <!-- Culverts Section -->
+  <div class="border p-3 mb-4 rounded">
+    <h5>Proposed Culverts</h5>
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label">Culvert Name</label>
+        <input type="text" id="culvertName" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Culvert Type</label>
+        <select id="culvertType" class="form-select">
+          <option value="">-- Select Type --</option>
+          <option value="Box">Box</option>
+          <option value="Pipe">Pipe</option>
+          <option value="Arch">Arch</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Span (m)</label>
+        <input type="number" id="culvertSpan" class="form-control" />
+      </div>
+      <div class="col-md-1">
+        <button type="button" id="addCulvertBtn" class="btn btn-success w-100">➕</button>
+      </div>
+    </div>
+
+    <div class="table-responsive mt-3">
+      <table class="table table-bordered" id="culvertTable">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Span</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
-  <!-- Upload Shapefile -->
-  <div class="mb-4">
-    <label class="form-label">Upload Road Shapefile (.shp)</label>
-    <input type="file" name="road_shapefile" class="form-control" accept=".shp" />
+  <!-- Bridges Section -->
+  <div class="border p-3 mb-4 rounded">
+    <h5>Proposed Bridges</h5>
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label">Bridge Name</label>
+        <input type="text" id="bridgeName" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Bridge Type</label>
+        <select id="bridgeType" class="form-select">
+          <option value="">-- Select Type --</option>
+          <option value="Suspension">Suspension</option>
+          <option value="Beam">Beam</option>
+          <option value="Truss">Truss</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Span (m)</label>
+        <input type="number" id="bridgeSpan" class="form-control" />
+      </div>
+      <div class="col-md-1">
+        <button type="button" id="addBridgeBtn" class="btn btn-success w-100">➕</button>
+      </div>
+    </div>
+
+    <div class="table-responsive mt-3">
+      <table class="table table-bordered" id="bridgeTable">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Span</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Walls Section -->
+  <div class="border p-3 mb-4 rounded">
+    <h5>Proposed Retaining Walls</h5>
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label">Wall Name</label>
+        <input type="text" id="wallName" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Wall Type</label>
+        <select id="wallType" class="form-select">
+          <option value="">-- Select Type --</option>
+          <option value="Gravity">Gravity</option>
+          <option value="Cantilever">Cantilever</option>
+          <option value="Anchored">Anchored</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Length (m)</label>
+        <input type="number" id="wallLength" class="form-control" />
+      </div>
+      <div class="col-md-1">
+        <button type="button" id="addWallBtn" class="btn btn-success w-100">➕</button>
+      </div>
+    </div>
+
+    <div class="table-responsive mt-3">
+      <table class="table table-bordered" id="wallTable">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Length</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </div>
 
   <div class="text-center">
-    <a href="index.html" class="btn btn-outline-secondary">⬅ Back</a>
-    <button class="btn btn-primary">Save Asset Pool</button>
+	<form action ="success_asset_pool.html">
+		<a href="index.html" class="btn btn-secondary">⬅ Back</a>
+		<button class="btn btn-primary" type="submit">Save Asset Pool</button>
+	</form>
   </div>
 </div>
 
+<!-- JavaScript for dynamic tables -->
 <script>
-  const poolRoadName = document.getElementById("poolRoadName");
-  const poolRoadLength = document.getElementById("poolRoadLength");
-  const poolCulverts = document.getElementById("poolCulverts");
-  const poolBridges = document.getElementById("poolBridges");
-  const poolWalls = document.getElementById("poolWalls");
-  const poolAssetTable = document.querySelector("#poolAssetTable tbody");
-
-  document.getElementById("addToPoolBtn").addEventListener("click", () => {
-    const road = poolRoadName.value.trim();
-    const length = poolRoadLength.value.trim();
-    const culverts = Array.from(poolCulverts.selectedOptions).map(opt => opt.value);
-    const bridges = Array.from(poolBridges.selectedOptions).map(opt => opt.value);
-    const walls = Array.from(poolWalls.selectedOptions).map(opt => opt.value);
-
-    if (!road || !length || (culverts.length === 0 && bridges.length === 0 && walls.length === 0)) {
-      alert("Please fill road name, length and at least one asset.");
+  function addRow(tableId, inputs, namePrefix) {
+    const tbody = document.querySelector(`#${tableId} tbody`);
+    const values = inputs.map(input => input.value.trim());
+    if (values.some(v => !v)) {
+      alert("Please fill all fields.");
       return;
     }
 
     const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>
-        <input type="hidden" name="pool_road[]" value="${road}">${road}
-      </td>
-      <td><input type="hidden" name="pool_length[]" value="${length}">${length}</td>
-      <td>
-        ${culverts.map(c => `<input type="hidden" name="pool_culverts_${road}[]" value="${c}"><span class="badge bg-info me-1">${c}</span>`).join("")}
-      </td>
-      <td>
-        ${bridges.map(b => `<input type="hidden" name="pool_bridges_${road}[]" value="${b}"><span class="badge bg-warning text-dark me-1">${b}</span>`).join("")}
-      </td>
-      <td>
-        ${walls.map(w => `<input type="hidden" name="pool_walls_${road}[]" value="${w}"><span class="badge bg-secondary me-1">${w}</span>`).join("")}
-      </td>
-      <td><button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button></td>
-    `;
+    tr.innerHTML = values.map((val, i) =>
+      `<td><input type="hidden" name="${namePrefix}[${i}][]" value="${val}">${val}</td>`
+    ).join("") + `<td><button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button></td>`;
+    tbody.appendChild(tr);
+    inputs.forEach(i => i.value = "");
+  }
 
-    poolAssetTable.appendChild(tr);
+  document.getElementById("addCulvertBtn").onclick = () =>
+    addRow("culvertTable", [culvertName, culvertType, culvertSpan], "culvert");
 
-    // Reset inputs
-    poolRoadName.value = "";
-    poolRoadLength.value = "";
-    poolCulverts.selectedIndex = -1;
-    poolBridges.selectedIndex = -1;
-    poolWalls.selectedIndex = -1;
-  });
+  document.getElementById("addBridgeBtn").onclick = () =>
+    addRow("bridgeTable", [bridgeName, bridgeType, bridgeSpan], "bridge");
 
-  poolAssetTable.addEventListener("click", (e) => {
-    if (e.target.classList.contains("deleteRowBtn")) {
-      e.target.closest("tr").remove();
-    }
-  });
+  document.getElementById("addWallBtn").onclick = () =>
+    addRow("wallTable", [wallName, wallType, wallLength], "wall");
+
+  document.querySelectorAll("tbody").forEach(tbody =>
+    tbody.addEventListener("click", e => {
+      if (e.target.classList.contains("deleteRowBtn")) {
+        e.target.closest("tr").remove();
+      }
+    })
+  );
 </script>
 </body>
 </html>
