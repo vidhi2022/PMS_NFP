@@ -50,7 +50,7 @@
 		}
 
 		.row.g-3,
-		.row.mb-4,
+		.row.mb-2,
 		.row.mb-3 {
 			margin-bottom: 0.75rem !important;
 			gap: 0.75rem !important;
@@ -65,7 +65,7 @@
 		</div>
 		<form action="success.html" method="GET" enctype="multipart/form-data">
 			<!-- Project Information -->
-			<div class="card mb-4">
+			<div class="card mb-2">
 				<div class="card-header bg-light fw-semibold">Project Information</div>
 				<div class="card-body">
 					<div class="row g-2">
@@ -135,10 +135,10 @@
 				</div>
 			</div>
 
-			<!-- Referential Asset Selection -->
-			<div class="card mb-4">
+			<div class="card mb-2">
 				<div class="card-header bg-light fw-semibold">Referential Asset Section</div>
 				<div class="card-body">
+					<!-- Radio Buttons -->
 					<div class="row mb-3">
 						<div class="col-sm-12">
 							<div class="form-check form-check-inline">
@@ -154,13 +154,13 @@
 						</div>
 					</div>
 
-					<!-- If Existing Road is selected -->
 					<div id="asset_n_sub_asset_fields">
+						<!-- Select Fields + Button Row -->
 						<div class="row align-items-end">
-							<!-- Road Select -->
+							<!-- Select Road -->
 							<div class="col-sm-2">
 								<label class="form-label">Select Road</label>
-								<select id="refRoadSelect" class="form-select">
+								<select id="refRoadSelect" class="form-select form-select-sm">
 									<option value="">-- Select Road --</option>
 									<option value="Rd0001">Rd0001</option>
 									<option value="Rd0002">Rd0002</option>
@@ -170,7 +170,7 @@
 							<!-- Culverts -->
 							<div class="col-sm-2">
 								<label class="form-label">List of Culverts</label>
-								<select id="refCulvertSelect" class="form-select">
+								<select id="refCulvertSelect" class="form-select form-select-sm">
 									<option value="">-- NA--</option>
 									<option value="Culvert A">Culvert A</option>
 									<option value="Culvert B">Culvert B</option>
@@ -180,7 +180,7 @@
 							<!-- Bridges -->
 							<div class="col-sm-2">
 								<label class="form-label">List of Bridges</label>
-								<select id="refBridgeSelect" class="form-select">
+								<select id="refBridgeSelect" class="form-select form-select-sm">
 									<option value="">-- NA--</option>
 									<option value="Bridge A">Bridge A</option>
 									<option value="Bridge B">Bridge B</option>
@@ -190,7 +190,7 @@
 							<!-- Retaining Walls -->
 							<div class="col-sm-2">
 								<label class="form-label">List of Retaining Walls</label>
-								<select id="refWallSelect" class="form-select">
+								<select id="refWallSelect" class="form-select form-select-sm">
 									<option value="">-- NA--</option>
 									<option value="Wall A">Wall A</option>
 									<option value="Wall B">Wall B</option>
@@ -198,16 +198,38 @@
 								</select>
 							</div>
 							<!-- Add Button -->
-							<div class="col-sm-2">
-								<button type="button" id="addRefAssetBtn" class="btn btn-success w-100">➕</button>
+							<div class="col-sm-1 d-flex justify-content-center align-items-center">
+								<button type="button" id="addRefAssetBtn" class="btn btn-success px-3 py-4">➕</button>
 							</div>
 						</div>
+
+						<!-- Scope Definition -->
+						<div class="card mt-4" style="max-width: 700px;">
+							<div class="card-header bg-light fw-semibold">Scope Definition</div>
+							<div class="card-body">
+								<div class="row align-items-end">
+									<div class="col-sm-3">
+										<label class="form-label">Start Chainage (in KM):</label>
+										<input type="text" name="txt_start_chainage" id="txt_start_chainage"
+											class="form-control form-control-sm" required />
+									</div>
+									<div class="col-sm-3">
+										<label class="form-label">End Chainage (in KM):</label>
+										<input type="text" name="txt_end_chainage" id="txt_end_chainage"
+											class="form-control form-control-sm" required />
+									</div>
+								</div>
+							</div>
+						</div>
+
 						<!-- Table -->
 						<div class="table-responsive mt-4">
 							<table class="table table-bordered" id="refAssetTable">
 								<thead class="table-light">
 									<tr>
 										<th>Road</th>
+										<th>Start Chainage</th>
+										<th>End Chainage</th>
 										<th>Culverts</th>
 										<th>Bridges</th>
 										<th>Walls</th>
@@ -215,26 +237,32 @@
 									</tr>
 								</thead>
 								<tbody>
-									<!-- Rows go here -->
+									<!-- Dynamic Rows -->
 								</tbody>
 							</table>
+						</div>
+
+						<div class="col-md-3">
+							<label class="form-label">Upload New Shapefile of Road (.shp)</label>
+							<input type="file" name="shapefile" accept=".shp" class="form-control">
 						</div>
 					</div>
 				</div>
 			</div>
 
 
+
 			<!-- Parent Asset Selection -->
-			<div class="card mb-4">
-				<div class="card-header bg-light fw-semibold">Parent Asset</div>
+			<div class="card mb-2">
+				<div class="card-header bg-light fw-semibold">Asset Pool Section</div>
 				<div class="card-body">
 					<div class="row mb-3">
 						<div class="col-sm-12">
-							<div class="form-check form-check-inline">
+							<!-- <div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox" name="parent_asset_type[]"
 									id="existingAsset" value="existing" checked />
 								<label class="form-check-label" for="existingAsset">Existing Road and Sub Assets</label>
-							</div>
+							</div> -->
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox" name="parent_asset_type[]"
 									id="assetPool" value="pool" />
@@ -244,71 +272,7 @@
 					</div>
 
 					<!-- If Existing Road is selected -->
-					<div id="existingAssetFields">
-						<div class="row align-items-end">
-							<!-- Road Select -->
-							<div class="col-sm-2">
-								<label class="form-label">Select Road</label>
-								<select id="roadSelect" class="form-select">
-									<option value="">-- Select Road --</option>
-									<option value="Rd0001">Rd0001</option>
-									<option value="Rd0002">Rd0002</option>
-									<option value="Rd0003">Rd0003</option>
-								</select>
-							</div>
-							<!-- Culverts -->
-							<div class="col-sm-2">
-								<label class="form-label">List of Culverts</label>
-								<select id="culvertSelect" class="form-select">
-									<option value="">-- NA--</option>
-									<option value="Culvert A">Culvert A</option>
-									<option value="Culvert B">Culvert B</option>
-									<option value="Culvert C">Culvert C</option>
-								</select>
-							</div>
-							<!-- Bridges -->
-							<div class="col-sm-2">
-								<label class="form-label">List of Bridges</label>
-								<select id="bridgeSelect" class="form-select">
-									<option value="">-- NA--</option>
-									<option value="Bridge A">Bridge A</option>
-									<option value="Bridge B">Bridge B</option>
-									<option value="Bridge C">Bridge C</option>
-								</select>
-							</div>
-							<!-- Retaining Walls -->
-							<div class="col-sm-2">
-								<label class="form-label">List of Retaining Walls</label>
-								<select id="wallSelect" class="form-select">
-									<option value="">-- NA--</option>
-									<option value="Wall A">Wall A</option>
-									<option value="Wall B">Wall B</option>
-									<option value="Wall C">Wall C</option>
-								</select>
-							</div>
-							<!-- Add Button -->
-							<div class="col-sm-2">
-								<button type="button" id="addAssetBtn" class="btn btn-success w-100">➕</button>
-							</div>
-						</div>
-						<!-- Table -->
-						<div class="table-responsive mt-4">
-							<table class="table table-bordered" id="assetTable">
-								<thead class="table-light">
-									<tr>
-										<th>Road</th>
-										<th>Culverts</th>
-										<th>Bridges</th>
-										<th>Walls</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<!-- Rows go here -->
-								</tbody>
-							</table>
-						</div>
-					</div>
+
 					<!-- If Asset Pool is selected -->
 					<div id="assetPoolFields" style="display: none;">
 						<div class="row g-3">
@@ -331,7 +295,7 @@
 				</div>
 			</div>
 			<!-- Site Incharge Details -->
-			<div class="card mb-4">
+			<div class="card mb-2">
 				<div class="card-header bg-light fw-semibold">Site Incharge Details</div>
 				<div class="card-body">
 					<div class="row g-3">
@@ -363,7 +327,7 @@
 				</div>
 			</div>
 			<!-- Upload Documents -->
-			<div class="card mb-4">
+			<div class="card mb-2">
 				<div class="card-header bg-light fw-semibold">Upload Documents</div>
 				<div class="card-body">
 					<div class="row g-3">
@@ -382,11 +346,27 @@
 					</div>
 				</div>
 			</div>
-			<!-- Submit Button -->
-			<div class="text-center">
-				<button type="submit" class="btn btn-primary px-4">Submit</button>
-			</div>
-		</form>
+	</div>
+	<div class="row g-3">
+		<div class="col-sm-3 text-center">
+
+		</div>
+		<div class="col-sm-2 text-center">
+			<button type="button" class="btn btn-primary px-4">Save</button>
+		</div>
+		<div class="col-sm-2 text-center">
+			<button type="button" class="btn btn-primary px-4">Cancel</button>
+		</div>
+		<!-- Submit Button -->
+		<div class="col-sm-2 text-center">
+			<button type="submit" class="btn btn-primary px-4">Submit</button>
+		</div>
+		<div class="col-sm-3 text-center">
+
+		</div>
+	</div>
+
+	</form>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -397,12 +377,6 @@
 		const assetPoolFields = document.getElementById('assetPoolFields');
 
 		function toggleAssetFields() {
-			if (existingAssetRadio.checked) {
-				existingAssetFields.style.display = 'block';
-			} else {
-				existingAssetFields.style.display = 'none';
-			}
-
 			if (assetPoolRadio.checked) {
 				assetPoolFields.style.display = 'block';
 			}
@@ -411,10 +385,9 @@
 			}
 		}
 
-		existingAssetRadio.addEventListener('change', toggleAssetFields);
+
 		assetPoolRadio.addEventListener('change', toggleAssetFields);
 
-		// Call once to set initial visibility
 		toggleAssetFields();
 	</script>
 
@@ -434,63 +407,73 @@
 			}
 		}
 
-		existingAssetRadio.addEventListener('change', toggleAssetSubAssetFields);
-		assetPoolRadio.addEventListener('change', toggleAssetSubAssetFields);
+		assetNSubassetRadio.addEventListener('change', toggleAssetSubAssetFields);
+		subAssetRadio.addEventListener('change', toggleAssetSubAssetFields);
 
 		// Call once to set initial visibility
-		toggleAssetFields();
+		toggleAssetSubAssetFields();
 
 		const addRefAssetBtn = document.getElementById("addRefAssetBtn");
 		const refRoadSelect = document.getElementById("refRoadSelect");
 		const refCulvertSelect = document.getElementById("refCulvertSelect");
 		const refBridgeSelect = document.getElementById("refBridgeSelect");
 		const refWallSelect = document.getElementById("refWallSelect");
-		const refAssetTableBody = document.querySelector("#refAssetTable tbody");
+		const txt_start_chainage = document.getElementById("txt_start_chainage");
+		const txt_end_chainage = document.getElementById("txt_end_chainage");
 
+		const refAssetTableBody = document.querySelector("#refAssetTable tbody");
 
 		addRefAssetBtn.addEventListener("click", () => {
 			const road = refRoadSelect.value;
 			const culverts = Array.from(refCulvertSelect.selectedOptions).map(opt => opt.value);
 			const bridges = Array.from(refBridgeSelect.selectedOptions).map(opt => opt.value);
 			const walls = Array.from(refWallSelect.selectedOptions).map(opt => opt.value);
+			const startChainage = txt_start_chainage.value.trim();
+			const endChainage = txt_end_chainage.value.trim();
 
-			if (!road || (culverts.length === 0 && bridges.length === 0 && walls.length === 0)) {
-				alert("Please select a road and at least one sub-asset.");
+			if (!road || !startChainage || !endChainage || (culverts.length === 0 && bridges.length === 0 && walls.length === 0)) {
+				alert("Please select a road, enter chainage, and at least one sub-asset.");
 				return;
 			}
 
 			const tr = document.createElement("tr");
 
-			tr.innerHTML = `<td><input type="hidden" name="roads[]" value="${road}">${road}</td>
-													<td>
-			      ${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
-															<span class="badge bg-info me-1">${c}</span>`).join('')}
-														</td>
-														<td>
-			      ${bridges.map(b => `														<input type="hidden"
-															       name="bridges_${road}[]"
-															       value="${b}">
-																<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
-															</td>
-															<td>
-			      ${walls.map(w => `															<input type="hidden"
-																       name="walls_${road}[]"
-																       value="${w}">
-																	<span class="badge bg-secondary me-1">${w}</span>`).join('')}
-																</td>
-																<td>
-																	<button type="button"
-																	        class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
-																</td>
-			  `;
+			tr.innerHTML = `
+		<td>
+			<input type="hidden" name="roads[]" value="${road}">${road}
+		</td>
+		<td>
+			<input type="hidden" name="start_chainage_${road}" value="${startChainage}">${startChainage}
+		</td>
+		<td>
+			<input type="hidden" name="end_chainage_${road}" value="${endChainage}">${endChainage}
+		</td>
+		<td>
+			${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
+			<span class="badge bg-info me-1">${c}</span>`).join('')}
+		</td>
+		<td>
+			${bridges.map(b => `<input type="hidden" name="bridges_${road}[]" value="${b}">
+			<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
+		</td>
+		<td>
+			${walls.map(w => `<input type="hidden" name="walls_${road}[]" value="${w}">
+			<span class="badge bg-secondary me-1">${w}</span>`).join('')}
+		</td>
+		<td>
+			<button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
+		</td>
+	`;
 
 			refAssetTableBody.appendChild(tr);
 
-			// Reset
+			// Reset form inputs
 			refRoadSelect.selectedIndex = 0;
 			refCulvertSelect.selectedIndex = -1;
 			refBridgeSelect.selectedIndex = -1;
 			refWallSelect.selectedIndex = -1;
+			txt_start_chainage.value = "";
+			txt_end_chainage.value = "";
 		});
 
 		refAssetTableBody.addEventListener("click", function (e) {
@@ -498,6 +481,7 @@
 				e.target.closest("tr").remove();
 			}
 		});
+
 	</script>
 
 	<script>
