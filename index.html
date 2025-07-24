@@ -12,7 +12,7 @@
 		.form-select {
 			padding: 0.25rem 0.4rem !important;
 			font-size: 11px !important;
-			height: calc(1.5em + 0.6rem + 2px) !important;
+			/* height: calc(1.5em + 0.6rem + 2px) !important; */
 		}
 
 		.form-label {
@@ -176,7 +176,7 @@
 							<!-- Culverts -->
 							<div class="col-sm-2">
 								<label class="form-label">List of Culverts</label>
-								<select id="refCulvertSelect" class="form-select form-select-sm">
+								<select id="refCulvertSelect" class="form-control" multiple size="3">
 									<option value="">-- NA--</option>
 									<option value="Culvert A">Culvert A</option>
 									<option value="Culvert B">Culvert B</option>
@@ -186,7 +186,7 @@
 							<!-- Bridges -->
 							<div class="col-sm-2">
 								<label class="form-label">List of Bridges</label>
-								<select id="refBridgeSelect" class="form-select form-select-sm">
+								<select id="refBridgeSelect" class="form-control" multiple size="3">
 									<option value="">-- NA--</option>
 									<option value="Bridge A">Bridge A</option>
 									<option value="Bridge B">Bridge B</option>
@@ -196,7 +196,7 @@
 							<!-- Retaining Walls -->
 							<div class="col-sm-2">
 								<label class="form-label">List of Retaining Walls</label>
-								<select id="refWallSelect" class="form-select form-select-sm">
+								<select id="refWallSelect" class="form-control" multiple size="3">
 									<option value="">-- NA--</option>
 									<option value="Wall A">Wall A</option>
 									<option value="Wall B">Wall B</option>
@@ -402,24 +402,27 @@
 					Upload Documents
 				</div>
 				<div class="card-body">
-					<div class="row g-3">
+					<div class="row g-2">
 						<div class="col-sm-3">
 							<label class="form-label">Upload Project Plan (PDF)</label>
 							<input type="file" name="project_plan" class="form-control" accept=".pdf" />
+						</div>
+						<div class="col-sm-3">
+							<label for="dprUpload" class="form-label fw-bold">Upload DPR Document (PDF/Excel)</label>
+							<input type="file" class="form-control form-control-sm" id="dprUpload" name="dpr_document"
+								accept=".pdf, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
 						</div>
 						<div class="col-sm-3">
 							<label class="form-label">Upload Site Images</label>
 							<input type="file" name="site_images[]" class="form-control" multiple accept="image/*" />
 						</div>
 						<div class="col-sm-3">
-							<label class="form-label">Upload Work Order Document</label>
+							<label class="form-label">Upload Work Order Document(pdf/doc/docx)</label>
 							<input type="file" name="work_order_doc" class="form-control" accept=".pdf,.doc,.docx" />
 						</div>
 					</div>
 				</div>
 			</div>
-
-
 	</div>
 	<div class="row g-3">
 		<div class="col-sm-3 text-center">
@@ -531,11 +534,8 @@
 
 		const shapeFileDiv = document.getElementById("shapeFileUploadContainer");
 
-
-
 		function toggleAssetSubAssetFields() {
 			if (assetNSubassetRadio.checked) {
-				// existingAssetFields.style.display = 'block';
 				shapeFileDiv.style.display = "block";
 			}
 
@@ -714,15 +714,15 @@
 				const data = assetPools[selectedId];
 				assetPoolDetailsSection.style.display = 'block';
 				assetPoolDetailsContent.innerHTML = `
-			<p><strong>Road Name:</strong> ${data.road}</p>
-			<p><strong>Length:</strong> ${data.length}</p>
-			<p><strong>Category:</strong> ${data.category}</p>
-			<p><strong>Type:</strong> ${data.type}</p>
-			<p><strong>Owner:</strong> ${data.owner}</p>
-			<p><strong>Shapefile:</strong> ${data.shapefile}</p>
-			<p><strong>Culverts:</strong> ${data.culverts.join(', ')}</p>
-			<p><strong>Bridges:</strong> ${data.bridges.join(', ')}</p>
-			<p><strong>Retaining Walls:</strong> ${data.walls.join(', ')}</p>
+													<p><strong>Road Name:</strong> ${data.road}</p>
+													<p><strong>Length:</strong> ${data.length}</p>
+													<p><strong>Category:</strong> ${data.category}</p>
+													<p><strong>Type:</strong> ${data.type}</p>
+													<p><strong>Owner:</strong> ${data.owner}</p>
+													<p><strong>Shapefile:</strong> ${data.shapefile}</p>
+													<p><strong>Culverts:</strong> ${data.culverts.join(', ')}</p>
+													<p><strong>Bridges:</strong> ${data.bridges.join(', ')}</p>
+													<p><strong>Retaining Walls:</strong> ${data.walls.join(', ')}</p>
 												`;
 			} else {
 				assetPoolDetailsSection.style.display = 'none';
@@ -767,7 +767,6 @@
 			document.querySelector('select[name="project_awarded_to"]').value = data.project_awarded_to;
 		}
 	</script>
-
 </body>
 
 </html>
