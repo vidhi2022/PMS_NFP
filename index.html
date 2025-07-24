@@ -63,6 +63,12 @@
 		<div class="mb-0 text-center">
 			<h1 class="text-uppercase text-primary fw-bold">Create New Project</h1>
 		</div>
+		<div class="d-flex justify-content-end mb-3">
+			<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#partialProjectsModal">
+				<a href="partial-projects.html" class="btn btn-primary btn-sm">📋 View List of Partially Saved
+					Projects</a>
+			</button>
+		</div>
 		<form action="success.html" method="GET" enctype="multipart/form-data">
 			<!-- Project Information -->
 			<div class="card mb-2">
@@ -293,7 +299,18 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="col-sm-12 mt-3" id="assetPoolDetails" style="display: none;">
+					<div class="card">
+						<div class="card-header bg-info text-white fw-bold">Selected Asset Pool Details</div>
+						<div class="card-body p-2" id="assetPoolDetailsContent">
+							<!-- Dynamic content will be injected here -->
+						</div>
+					</div>
+				</div>
 			</div>
+
+
 			<!-- Site Incharge Details -->
 			<div class="card mb-2">
 				<div class="card-header bg-light fw-semibold">Site Incharge Details</div>
@@ -316,19 +333,14 @@
 							<label class="form-label">Site Incharge Phone No.</label>
 							<input type="text" name="site_incharge_ph_no" class="form-control" />
 						</div>
-						<div class="col-sm-3">
-							<label class="form-label">Is Published</label>
-							<select name="is_published" class="form-select">
-								<option value="Y">Yes</option>
-								<option value="N">No</option>
-							</select>
-						</div>
 					</div>
 				</div>
 			</div>
 			<!-- Upload Documents -->
 			<div class="card mb-2">
-				<div class="card-header bg-light fw-semibold">Upload Documents</div>
+				<div class="card-header bg-light fw-semibold">
+					Upload Documents
+				</div>
 				<div class="card-body">
 					<div class="row g-3">
 						<div class="col-sm-3">
@@ -346,13 +358,72 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- Item Of Work Section -->
+			<div class="card mb-2">
+				<div class="card-header bg-light fw-semibold">
+					Add Items of Work
+				</div>
+				<div class="card-body">
+					<!-- Input Row -->
+					<div class="row g-3 align-items-end">
+						<!-- Item of Work Select -->
+						<div class="col-md-3">
+							<label class="form-label">Item of Work</label>
+							<select id="workItemSelect" class="form-select form-select-sm">
+								<option value="">-- Select Item --</option>
+								<option>1000 hp</option>
+								<option>750 hp</option>
+								<option>Box culvert</option>
+								<option>breast wall</option>
+								<option>Earthwork</option>
+								<option>FDR</option>
+								<option>MSS</option>
+								<option>payment</option>
+								<option>PCC</option>
+								<option>RCC Culvert</option>
+								<option>retaining wall</option>
+								<option>WBM I</option>
+								<option>WBM II</option>
+							</select>
+						</div>
+						<!-- Quantity Input -->
+						<div class="col-md-3">
+							<label class="form-label">Quantity As Per DPR</label>
+							<input type="number" id="workQtyInput" class="form-control form-control-sm"
+								placeholder="Enter quantity" min="0" step="any" />
+						</div>
+						<!-- Add Button -->
+						<div class="col-md-2">
+							<button type="button" id="addWorkItemBtn" class="btn btn-success btn-sm w-100">➕
+								Add</button>
+						</div>
+					</div>
+
+					<!-- Table of Added Items -->
+					<div class="table-responsive mt-3">
+						<table class="table table-bordered table-sm" id="workItemsTable">
+							<thead class="table-light">
+								<tr>
+									<th>Item of Work</th>
+									<th>Quantity As Per DPR</th>
+									<th style="width:60px;">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- rows inserted here -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 	</div>
 	<div class="row g-3">
 		<div class="col-sm-3 text-center">
 
 		</div>
 		<div class="col-sm-2 text-center">
-			<button type="button" class="btn btn-primary px-4">Save</button>
+			<button type="button" class="btn btn-primary px-4" onclick="savePartial()">Save</button>
 		</div>
 		<div class="col-sm-2 text-center">
 			<button type="button" class="btn btn-primary px-4">Cancel</button>
@@ -369,7 +440,64 @@
 	</form>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		function savePartial() {
+			// Simulate generating a project number
+			const projectNo = "PRJ20250030";
 
+			// Optional: Store data to localStorage or backend here
+
+			// Redirect to success page with project number in query string
+			window.location.href = `partial-save-success.html?projectNo=${projectNo}`;
+		}
+	</script>
+	<script>
+		// Grab elements
+		const workSelect = document.getElementById('workItemSelect');
+		const qtyInput = document.getElementById('workQtyInput');
+		const addBtn = document.getElementById('addWorkItemBtn');
+		const tableBody = document.querySelector('#workItemsTable tbody');
+
+		addBtn.addEventListener('click', () => {
+			const item = workSelect.value;
+			const qty = qtyInput.value.trim();
+
+			if (!item) {
+				return alert('Please select an Item of Work.');
+			}
+			if (!qty || isNaN(qty) || Number(qty) <= 0) {
+				return alert('Please enter a valid quantity.');
+			}
+
+			// Create row
+			const tr = document.createElement('tr');
+			tr.innerHTML = `
+							<td>
+							<input type="hidden" name="work_items[]" value="${item}">
+							${item}
+							</td>
+							<td>
+							<input type="hidden" name="work_qtys[]" value="${qty}">
+							${qty}
+							</td>
+							<td class="text-center">
+							<button type="button" class="btn btn-sm btn-danger deleteRowBtn">❌</button>
+							</td>
+						`;
+			tableBody.appendChild(tr);
+
+			// Reset inputs
+			workSelect.selectedIndex = 0;
+			qtyInput.value = '';
+		});
+
+		// Delegate delete
+		tableBody.addEventListener('click', ev => {
+			if (ev.target.classList.contains('deleteRowBtn')) {
+				ev.target.closest('tr').remove();
+			}
+		});
+	</script>
 	<script>
 		const existingAssetRadio = document.getElementById('existingAsset');
 		const assetPoolRadio = document.getElementById('assetPool');
@@ -439,30 +567,30 @@
 			const tr = document.createElement("tr");
 
 			tr.innerHTML = `
-		<td>
-			<input type="hidden" name="roads[]" value="${road}">${road}
-		</td>
-		<td>
-			<input type="hidden" name="start_chainage_${road}" value="${startChainage}">${startChainage}
-		</td>
-		<td>
-			<input type="hidden" name="end_chainage_${road}" value="${endChainage}">${endChainage}
-		</td>
-		<td>
-			${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
+			<td>
+				<input type="hidden" name="roads[]" value="${road}">${road}
+			</td>
+			<td>
+				<input type="hidden" name="start_chainage_${road}" value="${startChainage}">${startChainage}
+			</td>
+			<td>
+				<input type="hidden" name="end_chainage_${road}" value="${endChainage}">${endChainage}
+			</td>
+			<td>
+				${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
 			<span class="badge bg-info me-1">${c}</span>`).join('')}
-		</td>
-		<td>
-			${bridges.map(b => `<input type="hidden" name="bridges_${road}[]" value="${b}">
+			</td>
+			<td>
+				${bridges.map(b => `<input type="hidden" name="bridges_${road}[]" value="${b}">
 			<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
-		</td>
-		<td>
-			${walls.map(w => `<input type="hidden" name="walls_${road}[]" value="${w}">
+			</td>
+			<td>
+				${walls.map(w => `<input type="hidden" name="walls_${road}[]" value="${w}">
 			<span class="badge bg-secondary me-1">${w}</span>`).join('')}
-		</td>
-		<td>
-			<button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
-		</td>
+			</td>
+			<td>
+				<button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
+			</td>
 	`;
 
 			refAssetTableBody.appendChild(tr);
@@ -506,26 +634,26 @@
 			const tr = document.createElement("tr");
 
 			tr.innerHTML = `<td><input type="hidden" name="roads[]" value="${road}">${road}</td>
-													<td>
-			      ${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
+			<td>
+				${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
 															<span class="badge bg-info me-1">${c}</span>`).join('')}
-														</td>
-														<td>
-			      ${bridges.map(b => `														<input type="hidden"
+			</td>
+			<td>
+				${bridges.map(b => `														<input type="hidden"
 															       name="bridges_${road}[]"
 															       value="${b}">
 																<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
-															</td>
-															<td>
-			      ${walls.map(w => `															<input type="hidden"
+			</td>
+			<td>
+				${walls.map(w => `															<input type="hidden"
 																       name="walls_${road}[]"
 																       value="${w}">
 																	<span class="badge bg-secondary me-1">${w}</span>`).join('')}
-																</td>
-																<td>
-																	<button type="button"
-																	        class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
-																</td>
+			</td>
+			<td>
+				<button type="button"
+					class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
+			</td>
 			  `;
 
 			assetTableBody.appendChild(tr);
@@ -543,6 +671,98 @@
 			}
 		});
 	</script>
+
+
+	<script>
+		const assetPools = {
+			AP001: {
+				road: 'Proposed Road A',
+				length: '12.5 km',
+				category: 'National Highway',
+				type: 'Flexible',
+				owner: 'PWD',
+				culverts: ['Culvert A1', 'Culvert A2'],
+				bridges: ['Proposed Bridge A'],
+				walls: ['Wall A1'],
+				shapefile: 'roadA.shp'
+			},
+			AP002: {
+				road: 'Proposed Road B',
+				length: '7.2 km',
+				category: 'State Highway',
+				type: 'Rigid',
+				owner: 'R&B Dept',
+				culverts: ['Proposed Culvert B1'],
+				bridges: [],
+				walls: ['Wall B1', 'Wall B2'],
+				shapefile: 'roadB.shp'
+			}
+		};
+
+		const assetPoolDropdown = document.querySelector('select[name="asset_pool"]');
+		const assetPoolDetailsSection = document.getElementById("assetPoolDetails");
+		const assetPoolDetailsContent = document.getElementById("assetPoolDetailsContent");
+
+		assetPoolDropdown.addEventListener("change", () => {
+			const selectedId = assetPoolDropdown.value;
+			if (assetPools[selectedId]) {
+				const data = assetPools[selectedId];
+				assetPoolDetailsSection.style.display = 'block';
+				assetPoolDetailsContent.innerHTML = `
+			<p><strong>Road Name:</strong> ${data.road}</p>
+			<p><strong>Length:</strong> ${data.length}</p>
+			<p><strong>Category:</strong> ${data.category}</p>
+			<p><strong>Type:</strong> ${data.type}</p>
+			<p><strong>Owner:</strong> ${data.owner}</p>
+			<p><strong>Shapefile:</strong> ${data.shapefile}</p>
+			<p><strong>Culverts:</strong> ${data.culverts.join(', ')}</p>
+			<p><strong>Bridges:</strong> ${data.bridges.join(', ')}</p>
+			<p><strong>Retaining Walls:</strong> ${data.walls.join(', ')}</p>
+												`;
+			} else {
+				assetPoolDetailsSection.style.display = 'none';
+				assetPoolDetailsContent.innerHTML = '';
+			}
+		});
+	</script>
+
+	<script>
+		function getQueryParam(param) {
+			const params = new URLSearchParams(window.location.search);
+			return params.get(param);
+		}
+
+		const dummyProjects = {
+			PRJ20250001: {
+				project_name: "Bridge Upgradation PRJ20250001",
+				owner_dept_cd: "HSG",
+				division_cd: "Div I",
+				project_start_date: "2025-08-01",
+				project_end_date: "2026-01-01",
+				project_awarded_to: "HSG"
+			},
+			PRJ20250002: {
+				project_name: "Road Widening PRJ20250002",
+				owner_dept_cd: "RNB",
+				division_cd: "Div II",
+				project_start_date: "2025-09-15",
+				project_end_date: "2026-06-30",
+				project_awarded_to: "RNB"
+			}
+		};
+
+		const projectId = getQueryParam("projectId");
+		if (projectId && dummyProjects[projectId]) {
+			const data = dummyProjects[projectId];
+			document.querySelector('input[name="project_name"]').value = data.project_name;
+			document.querySelector('select[name="owner_dept_cd"]').value = data.owner_dept_cd;
+			document.querySelector('select[name="division_cd"]').value = data.division_cd;
+			document.querySelector('input[name="project_start_date"]').value = data.project_start_date;
+			document.querySelector('input[name="project_end_date"]').value = data.project_end_date;
+			document.querySelector('select[name="project_awarded_to"]').value = data.project_awarded_to;
+		}
+	</script>
+
 </body>
 
 </html>
