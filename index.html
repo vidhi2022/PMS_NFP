@@ -248,9 +248,9 @@
 							</table>
 						</div>
 
-						<div class="col-md-3">
-							<label class="form-label">Upload New Shapefile of Road (.shp)</label>
-							<input type="file" name="shapefile" accept=".shp" class="form-control">
+						<div class="col-md-3" id="shapeFileUploadContainer">
+							<label class="form-label fw-bold">Upload Road Shape File</label>
+							<input type="file" class="form-control form-control-sm" name="road_shapefile" accept=".shp">
 						</div>
 					</div>
 				</div>
@@ -520,6 +520,8 @@
 		assetPoolRadio.addEventListener('change', toggleAssetFields);
 
 		toggleAssetFields();
+
+
 	</script>
 
 	<script>
@@ -527,14 +529,19 @@
 		const subAssetRadio = document.getElementById('rdoSubAsset');
 		const asset_n_sub_asset_fields = document.getElementById('asset_n_sub_asset_fields');
 
+		const shapeFileDiv = document.getElementById("shapeFileUploadContainer");
+
+
 
 		function toggleAssetSubAssetFields() {
 			if (assetNSubassetRadio.checked) {
-				existingAssetFields.style.display = 'block';
+				// existingAssetFields.style.display = 'block';
+				shapeFileDiv.style.display = "block";
 			}
 
 			if (subAssetRadio.checked) {
 				assetPoolFields.style.display = 'block';
+				shapeFileDiv.style.display = "none";
 			}
 		}
 
@@ -570,31 +577,31 @@
 			const tr = document.createElement("tr");
 
 			tr.innerHTML = `
-			<td>
-				<input type="hidden" name="roads[]" value="${road}">${road}
-			</td>
-			<td>
-				<input type="hidden" name="start_chainage_${road}" value="${startChainage}">${startChainage}
-			</td>
-			<td>
-				<input type="hidden" name="end_chainage_${road}" value="${endChainage}">${endChainage}
-			</td>
-			<td>
-				${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
-			<span class="badge bg-info me-1">${c}</span>`).join('')}
-			</td>
-			<td>
-				${bridges.map(b => `<input type="hidden" name="bridges_${road}[]" value="${b}">
-			<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
-			</td>
-			<td>
-				${walls.map(w => `<input type="hidden" name="walls_${road}[]" value="${w}">
-			<span class="badge bg-secondary me-1">${w}</span>`).join('')}
-			</td>
-			<td>
-				<button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
-			</td>
-	`;
+							<td>
+							<input type="hidden" name="roads[]" value="${road}">${road}
+							</td>
+							<td>
+							<input type="hidden" name="start_chainage_${road}" value="${startChainage}">${startChainage}
+							</td>
+							<td>
+							<input type="hidden" name="end_chainage_${road}" value="${endChainage}">${endChainage}
+							</td>
+							<td>
+							${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
+							<span class="badge bg-info me-1">${c}</span>`).join('')}
+							</td>
+							<td>
+							${bridges.map(b => `<input type="hidden" name="bridges_${road}[]" value="${b}">
+							<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
+							</td>
+							<td>
+							${walls.map(w => `<input type="hidden" name="walls_${road}[]" value="${w}">
+							<span class="badge bg-secondary me-1">${w}</span>`).join('')}
+							</td>
+							<td>
+							<button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
+							</td>
+						`;
 
 			refAssetTableBody.appendChild(tr);
 
@@ -637,27 +644,22 @@
 			const tr = document.createElement("tr");
 
 			tr.innerHTML = `<td><input type="hidden" name="roads[]" value="${road}">${road}</td>
-			<td>
-				${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
-															<span class="badge bg-info me-1">${c}</span>`).join('')}
-			</td>
-			<td>
-				${bridges.map(b => `														<input type="hidden"
-															       name="bridges_${road}[]"
-															       value="${b}">
-																<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
-			</td>
-			<td>
-				${walls.map(w => `															<input type="hidden"
-																       name="walls_${road}[]"
-																       value="${w}">
-																	<span class="badge bg-secondary me-1">${w}</span>`).join('')}
-			</td>
-			<td>
-				<button type="button"
-					class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
-			</td>
-			  `;
+							<td>
+							${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
+							<span class="badge bg-info me-1">${c}</span>`).join('')}
+							</td>
+							<td>
+							${bridges.map(b => `<input type="hidden" name="bridges_${road}[]" value="${b}">
+							<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
+							</td>
+							<td>
+							${walls.map(w => `<input type="hidden" name="walls_${road}[]" value="${w}">
+							<span class="badge bg-secondary me-1">${w}</span>`).join('')}
+							</td>
+							<td>
+							<button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
+							</td>
+			  			`;
 
 			assetTableBody.appendChild(tr);
 
