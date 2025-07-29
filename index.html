@@ -77,12 +77,12 @@
 					<div class="row g-2">
 						<div class="col-sm-3">
 							<label class="form-label">Project Type</label>
-							<select name="owner_dept_cd" class="form-select" required>
+							<select name="projectTypeSelect" id="projectTypeSelect" class="form-select" required>
 								<option value="">-- Select --</option>
-								<option value="RNB">New Asset Creation</option>
-								<option value="HSG">Upgradation</option>
-								<option value="MECH">Maintenance</option>
-								<option value="MECH">New Asset and Upgradation</option>
+								<option value="NEW">New Asset Creation</option>
+								<option value="UPG">Upgradation</option>
+								<option value="MTN">Maintenance</option>
+								<option value="NWNUP">New Asset and Upgradation</option>
 							</select>
 						</div>
 
@@ -117,15 +117,7 @@
 							<label class="form-label">Project End Date</label>
 							<input type="date" name="project_end_date" class="form-control" />
 						</div>
-						<!-- <div class="col-sm-3">
-								<label class="form-label">Project Status Code</label>
-								<select name="project_status_cd" class="form-select">
-									<option value="">-- Select Status --</option>
-									<option value="RNB">In Progress</option>
-									<option value="HSG">Completed</option>
-									<option value="MECH">Cancelled</option>
-								</select>
-							</div> -->
+
 						<div class="col-sm-3">
 							<label class="form-label">Project Awarded To</label>
 							<select name="project_awarded_to" class="form-select">
@@ -141,8 +133,8 @@
 				</div>
 			</div>
 
-			<div class="card mb-2">
-				<div class="card-header bg-light fw-semibold">Referential Asset Section</div>
+			<div class="card mb-2" id="referentialAssetSection">
+				<div class="card-header bg-light fw-semibold" id="referentialAssetLabel">Referential Asset Section</div>
 				<div class="card-body">
 					<!-- Radio Buttons -->
 					<div class="row mb-3">
@@ -256,10 +248,82 @@
 				</div>
 			</div>
 
+			<div class="card mb-2" id="maintenanceSection">
+				<div class="card-header bg-light fw-semibold">Select Asset for Maintenance</div>
+				<div class="card-body">
+					<div class="row g-3 mb-2">
+						<div class="col-md-3">
+							<label class="form-label fw-bold">Select Roads</label>
+							<select class="form-select" id="maintRoads" multiple size="4">
+								<option value="RD001">Due Maintanence Road 001</option>
+								<option value="RD002">Due Maintanence Road 002</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label class="form-label fw-bold">Select Culverts</label>
+							<select class="form-select" id="maintCulverts" multiple size="4">
+								<option value="CUL001">Due Maintanence Culvert A</option>
+								<option value="CUL002">Due Maintanence Culvert B</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label class="form-label fw-bold">Select Bridges</label>
+							<select class="form-select" id="maintBridges" multiple size="4">
+								<option value="BR001">Due Maintanence Bridge A</option>
+								<option value="BR002">Due Maintanence Bridge B</option>
+							</select>
+						</div>
+						<div class="col-md-3">
+							<label class="form-label fw-bold">Select Retaining Walls</label>
+							<select class="form-select" id="maintWalls" multiple size="4">
+								<option value="RW001">Due Maintanence Wall A</option>
+								<option value="RW002">Due Maintanence Wall B</option>
+							</select>
+						</div>
+						<!-- Scope Definition -->
+						<div class="card mt-4" style="max-width: 700px;">
+							<div class="card-header bg-light fw-semibold">Scope Definition</div>
+							<div class="card-body">
+								<div class="row align-items-end">
+									<div class="col-sm-3">
+										<label class="form-label">Start Chainage (in KM):</label>
+										<input type="text" name="txt_start_chainage_mnt" id="txt_start_chainage_mnt"
+											class="form-control form-control-sm" required />
+									</div>
+									<div class="col-sm-3">
+										<label class="form-label">End Chainage (in KM):</label>
+										<input type="text" name="txt_end_chainage_mnt" id="txt_end_chainage_mnt"
+											class="form-control form-control-sm" required />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="btn btn-sm btn-success" onclick="addMaintenanceAssets()">+ Add to Table</button>
 
+					<div class="table-responsive mt-4">
+						<table class="table table-bordered" id="mtnAssetTable">
+							<thead class="table-light">
+								<tr>
+									<th>Road(s)</th>
+									<th>Start Chainage</th>
+									<th>End Chainage</th>
+									<th>Culverts</th>
+									<th>Bridges</th>
+									<th>Walls</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Dynamic Rows -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 
 			<!-- Parent Asset Selection -->
-			<div class="card mb-2">
+			<div class="card mb-2" id="assetPoolSection">
 				<div class="card-header bg-light fw-semibold">Asset Pool Section</div>
 				<div class="card-body">
 					<div class="row mb-3">
@@ -446,6 +510,87 @@
 	</form>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		const projectTypeSelect = document.getElementById("projectTypeSelect");
+		const referentialSection = document.getElementById("referentialAssetSection");
+		const referentialLabel = document.getElementById("referentialAssetLabel");
+		const assetPoolSection = document.getElementById("assetPoolSection");
+		const maintenanceSection = document.getElementById("maintenanceSection");
+
+		function toggleSectionsBasedOnProjectType() {
+			const selected = projectTypeSelect.value;
+
+			if (selected === "NEW") { // New Asset Creation
+				referentialSection.style.display = "none";
+				assetPoolSection.style.display = "block";
+				maintenanceSection.classList.add("d-none");
+				referentialLabel.textContent = "Referential Asset Section";
+			} else if (selected === "UPG") { // Upgradation
+				referentialSection.style.display = "block";
+				assetPoolSection.style.display = "none";
+				maintenanceSection.classList.add("d-none");
+				referentialLabel.textContent = "Select Asset for Upgradation";
+			} else if (selected === "MTN") { // Maintenance
+				referentialSection.style.display = "none";
+				assetPoolSection.style.display = "none";
+				maintenanceSection.classList.remove("d-none");
+			} else {
+				referentialSection.style.display = "block";
+				assetPoolSection.style.display = "block";
+				maintenanceSection.classList.add("d-none");
+				referentialLabel.textContent = "Referential Asset Section";
+			}
+		}
+
+		projectTypeSelect.addEventListener("change", toggleSectionsBasedOnProjectType);
+		toggleSectionsBasedOnProjectType(); // Initial check
+	</script>
+
+	<script>
+		function addMaintenanceAssets() {
+			const getSelectedValues = (selectId) => {
+				const options = document.getElementById(selectId).selectedOptions;
+				return Array.from(options).map(opt => opt.text).join(', ');
+			};
+
+			const roads = getSelectedValues('maintRoads');
+			const culverts = getSelectedValues('maintCulverts');
+			const bridges = getSelectedValues('maintBridges');
+			const walls = getSelectedValues('maintWalls');
+
+			const startChainage = document.getElementById('txt_start_chainage_mnt').value.trim();
+			const endChainage = document.getElementById('txt_end_chainage_mnt').value.trim();
+
+			if (!roads && !culverts && !bridges && !walls) {
+				alert("Please select at least one asset.");
+				return;
+			}
+
+			const tableBody = document.querySelector('#mtnAssetTable tbody');
+			const newRow = document.createElement('tr');
+
+			newRow.innerHTML = `
+								<td>${roads || '-'}</td>
+								<td>${startChainage || '-'}</td>
+								<td>${endChainage || '-'}</td>
+								<td>${culverts || '-'}</td>
+								<td>${bridges || '-'}</td>
+								<td>${walls || '-'}</td>
+								<td><button type="button" class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">Delete</button></td>
+								`;
+
+			tableBody.appendChild(newRow);
+
+			// Optional: Clear fields after adding
+			document.getElementById('txt_start_chainage_mnt').value = '';
+			document.getElementById('txt_end_chainage_mnt').value = '';
+			['maintRoads', 'maintCulverts', 'maintBridges', 'maintWalls'].forEach(id => {
+				document.getElementById(id).selectedIndex = -1;
+			});
+		}
+	</script>
+
+
 	<script>
 		function savePartial() {
 			// Simulate generating a project number
