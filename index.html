@@ -248,6 +248,117 @@
 				</div>
 			</div>
 
+
+			<div class="card mb-2" id="newAssetUpgradeSection" style="display: none;">
+				<div class="card-header bg-light fw-semibold">Referential Asset Section</div>
+				<div class="card-body">
+					<div class="row g-3 mb-2">
+						<div class="col-md-4">
+							<label class="form-label fw-bold">Select Roads</label>
+							<select class="form-select" id="refUpgradeRoads" multiple size="4">
+								<option value="RD001">Road A</option>
+								<option value="RD002">Road B</option>
+								<option value="RD003">Road C</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- Scope Definition -->
+					<div class="card mt-3" style="max-width: 600px;">
+						<div class="card-header bg-light fw-semibold">Scope Definition</div>
+						<div class="card-body">
+							<div class="row align-items-end">
+								<div class="col-sm-4">
+									<label class="form-label fw-bold">Start Chainage (in KM)</label>
+									<input type="text" id="upgrade_start_chainage" class="form-control form-control-sm">
+								</div>
+								<div class="col-sm-4">
+									<label class="form-label fw-bold">End Chainage (in KM)</label>
+									<input type="text" id="upgrade_end_chainage" class="form-control form-control-sm">
+								</div>
+								<div class="col-sm-4 mt-3">
+									<button class="btn btn-success btn-sm w-100" onclick="addUpgradeScope()">+ Add to
+										Table</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Scope Table -->
+					<div class="table-responsive mt-4">
+						<table class="table table-bordered" id="upgradeScopeTable">
+							<thead class="table-light">
+								<tr>
+									<th>Road(s)</th>
+									<th>Start Chainage</th>
+									<th>End Chainage</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+
+					<div class="col-md-3" id="shapeFileUploadContainer">
+						<label class="form-label fw-bold">Upload Road Shape File</label>
+						<input type="file" class="form-control form-control-sm" name="road_shapefile" accept=".shp">
+					</div>
+				</div>
+			</div>
+
+			<div class="card mb-2" id="upgradeSubAssetSection" style="display: none;">
+				<div class="card-header bg-light fw-semibold">Add Sub Assets (for New Asset & Upgradation)</div>
+				<div class="card-body">
+
+
+					<div class="row g-3 mb-3">
+						<div class="col-md-4">
+							<label class="form-label fw-bold">Culverts</label>
+							<select multiple class="form-select" size="5" id="upgradeCulverts">
+								<option value="CUL001">Culvert A</option>
+								<option value="CUL002">Culvert B</option>
+								<option value="CUL003">Culvert C</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label class="form-label fw-bold">Bridges</label>
+							<select multiple class="form-select" size="5" id="upgradeBridges">
+								<option value="BR001">Bridge A</option>
+								<option value="BR002">Bridge B</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label class="form-label fw-bold">Retaining Walls</label>
+							<select multiple class="form-select" size="5" id="upgradeWalls">
+								<option value="RW001">Wall A</option>
+								<option value="RW002">Wall B</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-3">
+							<button class="btn btn-success btn-sm w-100" onclick="addUpgradeSubAssets()">+ Add Sub
+								Assets</button>
+						</div>
+					</div>
+
+					<div class="table-responsive mt-4">
+						<table class="table table-bordered" id="upgradeSubAssetTable">
+							<thead class="table-light">
+								<tr>
+									<th>Culverts</th>
+									<th>Bridges</th>
+									<th>Retaining Walls</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
 			<div class="card mb-2" id="maintenanceSection">
 				<div class="card-header bg-light fw-semibold">Select Asset for Maintenance</div>
 				<div class="card-body">
@@ -511,11 +622,68 @@
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script>
+
+		// Add Scope Entries to Table
+		function addUpgradeScope() {
+			const roads = Array.from(document.getElementById('refUpgradeRoads').selectedOptions)
+				.map(opt => opt.text).join(', ');
+			const start = document.getElementById('upgrade_start_chainage').value.trim();
+			const end = document.getElementById('upgrade_end_chainage').value.trim();
+
+			if (!roads || !start || !end) {
+				alert('Please select roads and enter both start and end chainage.');
+				return;
+			}
+
+			const row = document.createElement('tr');
+			row.innerHTML = `
+							<td>${roads}</td>
+							<td>${start}</td>
+							<td>${end}</td>
+							<td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">Delete</button></td>
+							`;
+			document.querySelector('#upgradeScopeTable tbody').appendChild(row);
+
+			// Clear inputs
+			document.getElementById('upgrade_start_chainage').value = '';
+			document.getElementById('upgrade_end_chainage').value = '';
+			document.getElementById('refUpgradeRoads').selectedIndex = -1;
+		}
+
+		function addUpgradeSubAssets() {
+			// const road = document.getElementById('upgradeSubAssetRoad').value;
+
+			const culverts = Array.from(document.getElementById('upgradeCulverts').selectedOptions).map(opt => opt.text).join(', ');
+			const bridges = Array.from(document.getElementById('upgradeBridges').selectedOptions).map(opt => opt.text).join(', ');
+			const walls = Array.from(document.getElementById('upgradeWalls').selectedOptions).map(opt => opt.text).join(', ');
+
+			const row = document.createElement('tr');
+			row.innerHTML = `
+
+							<td>${culverts}</td>
+							<td>${bridges}</td>
+							<td>${walls}</td>
+							<td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">Delete</button></td>
+							`;
+			document.querySelector('#upgradeSubAssetTable tbody').appendChild(row);
+
+			// Optional: Clear selections
+			document.getElementById('upgradeSubAssetRoad').value = '';
+			document.getElementById('upgradeCulverts').selectedIndex = -1;
+			document.getElementById('upgradeBridges').selectedIndex = -1;
+			document.getElementById('upgradeWalls').selectedIndex = -1;
+		}
+	</script>
+
+
+	<script>
 		const projectTypeSelect = document.getElementById("projectTypeSelect");
 		const referentialSection = document.getElementById("referentialAssetSection");
 		const referentialLabel = document.getElementById("referentialAssetLabel");
 		const assetPoolSection = document.getElementById("assetPoolSection");
 		const maintenanceSection = document.getElementById("maintenanceSection");
+		const newAssetUpgradeSection = document.getElementById("newAssetUpgradeSection");
+		const upgradeSubAssetSection = document.getElementById("upgradeSubAssetSection");
 
 		function toggleSectionsBasedOnProjectType() {
 			const selected = projectTypeSelect.value;
@@ -534,7 +702,14 @@
 				referentialSection.style.display = "none";
 				assetPoolSection.style.display = "none";
 				maintenanceSection.classList.remove("d-none");
-			} else {
+			}
+			else if (selected === "NWNUP") {
+				newAssetUpgradeSection.style.display = "block";
+				upgradeSubAssetSection.style.display = "block";
+
+				referentialSection.style.display = "none";
+			}
+			else {
 				referentialSection.style.display = "block";
 				assetPoolSection.style.display = "block";
 				maintenanceSection.classList.add("d-none");
