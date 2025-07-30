@@ -315,23 +315,23 @@
 						<div class="col-md-4">
 							<label class="form-label fw-bold">Culverts</label>
 							<select multiple class="form-select" size="5" id="upgradeCulverts">
-								<option value="CUL001">Culvert A</option>
-								<option value="CUL002">Culvert B</option>
-								<option value="CUL003">Culvert C</option>
+								<option value="CUL001">Upgrade Culvert A</option>
+								<option value="CUL002">Upgrade Culvert B</option>
+								<option value="CUL003">Upgrade Culvert C</option>
 							</select>
 						</div>
 						<div class="col-md-4">
 							<label class="form-label fw-bold">Bridges</label>
 							<select multiple class="form-select" size="5" id="upgradeBridges">
-								<option value="BR001">Bridge A</option>
-								<option value="BR002">Bridge B</option>
+								<option value="BR001">Upgrade Bridge A</option>
+								<option value="BR002">Upgrade Bridge B</option>
 							</select>
 						</div>
 						<div class="col-md-4">
 							<label class="form-label fw-bold">Retaining Walls</label>
 							<select multiple class="form-select" size="5" id="upgradeWalls">
-								<option value="RW001">Wall A</option>
-								<option value="RW002">Wall B</option>
+								<option value="RW001">Upgrade Wall A</option>
+								<option value="RW002">Upgrade Wall B</option>
 							</select>
 						</div>
 					</div>
@@ -359,7 +359,7 @@
 				</div>
 			</div>
 
-			<div class="card mb-2" id="maintenanceSection">
+			<div class="card mb-2" id="maintenanceSection" style="display: none;">
 				<div class="card-header bg-light fw-semibold">Select Asset for Maintenance</div>
 				<div class="card-body">
 					<div class="row g-3 mb-2">
@@ -691,28 +691,37 @@
 			if (selected === "NEW") { // New Asset Creation
 				referentialSection.style.display = "none";
 				assetPoolSection.style.display = "block";
-				maintenanceSection.classList.add("d-none");
+				maintenanceSection.style.display = "none";
+				newAssetUpgradeSection.style.display = "none";
+				upgradeSubAssetSection.style.display = "none";
 				referentialLabel.textContent = "Referential Asset Section";
 			} else if (selected === "UPG") { // Upgradation
 				referentialSection.style.display = "block";
 				assetPoolSection.style.display = "none";
-				maintenanceSection.classList.add("d-none");
+				maintenanceSection.style.display = "none";
+				newAssetUpgradeSection.style.display = "none";
+				upgradeSubAssetSection.style.display = "none";
 				referentialLabel.textContent = "Select Asset for Upgradation";
 			} else if (selected === "MTN") { // Maintenance
 				referentialSection.style.display = "none";
 				assetPoolSection.style.display = "none";
-				maintenanceSection.classList.remove("d-none");
+				maintenanceSection.style.display = "block";
+				newAssetUpgradeSection.style.display = "none";
+				upgradeSubAssetSection.style.display = "none";
 			}
 			else if (selected === "NWNUP") {
 				newAssetUpgradeSection.style.display = "block";
 				upgradeSubAssetSection.style.display = "block";
-
 				referentialSection.style.display = "none";
+				maintenanceSection.style.display = "none";
+				assetPoolSection.style.display = "block";
 			}
 			else {
 				referentialSection.style.display = "block";
 				assetPoolSection.style.display = "block";
-				maintenanceSection.classList.add("d-none");
+				maintenanceSection.style.display = "block";
+				newAssetUpgradeSection.style.display = "block";
+				upgradeSubAssetSection.style.display = "block";
 				referentialLabel.textContent = "Referential Asset Section";
 			}
 		}
