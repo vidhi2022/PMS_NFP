@@ -253,7 +253,7 @@
 				<div class="card-header bg-light fw-semibold">Referential Asset Section</div>
 				<div class="card-body">
 					<div class="row g-3 mb-2">
-						<div class="col-md-4">
+						<div class="col-md-3">
 							<label class="form-label fw-bold">Select Roads</label>
 							<select class="form-select" id="refUpgradeRoads" multiple size="4">
 								<option value="RD001">Road A</option>
@@ -261,29 +261,35 @@
 								<option value="RD003">Road C</option>
 							</select>
 						</div>
-					</div>
 
-					<!-- Scope Definition -->
-					<div class="card mt-3" style="max-width: 600px;">
-						<div class="card-header bg-light fw-semibold">Scope Definition</div>
-						<div class="card-body">
-							<div class="row align-items-end">
-								<div class="col-sm-4">
-									<label class="form-label fw-bold">Start Chainage (in KM)</label>
-									<input type="text" id="upgrade_start_chainage" class="form-control form-control-sm">
-								</div>
-								<div class="col-sm-4">
-									<label class="form-label fw-bold">End Chainage (in KM)</label>
-									<input type="text" id="upgrade_end_chainage" class="form-control form-control-sm">
-								</div>
-								<div class="col-sm-4 mt-3">
-									<button type="button" class="btn btn-success btn-sm w-100"
-										onclick="addUpgradeScope()">+ Add to
-										Table</button>
+						<!-- Scope Definition -->
+						<div class="col-md-6">
+							<div class="card mt-3" style="max-width: 400px;">
+								<div class="card-header bg-light fw-semibold">Scope Definition</div>
+								<div class="card-body">
+									<div class="row align-items-end">
+										<div class="col-sm-4">
+											<label class="form-label fw-bold">Start Chainage (in KM)</label>
+											<input type="text" id="upgrade_start_chainage"
+												class="form-control form-control-sm">
+										</div>
+										<div class="col-sm-4">
+											<label class="form-label fw-bold">End Chainage (in KM)</label>
+											<input type="text" id="upgrade_end_chainage"
+												class="form-control form-control-sm">
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
+
+						<div class="col-md-3">
+							<button type="button" class="btn btn-success btn-sm " onclick="addUpgradeScope()">
+								+ Add to Table
+							</button>
+						</div>
 					</div>
+
 
 					<!-- Scope Table -->
 					<div class="table-responsive mt-4">
@@ -308,7 +314,9 @@
 			</div>
 
 			<div class="card mb-2" id="upgradeSubAssetSection" style="display: none;">
-				<div class="card-header bg-light fw-semibold">Add Sub Assets (for New Asset & Upgradation)</div>
+				<div id="newUpSubAssetTitle" class="card-header bg-light fw-semibold">
+					Add Sub Assets
+				</div>
 				<div class="card-body">
 
 
@@ -901,8 +909,8 @@
 			const startChainage = txt_start_chainage.value.trim();
 			const endChainage = txt_end_chainage.value.trim();
 
-			if (!road || !startChainage || !endChainage || (culverts.length === 0 && bridges.length === 0 && walls.length === 0)) {
-				alert("Please select a road, enter chainage, and at least one sub-asset.");
+			if (!road || !startChainage || !endChainage) {
+				alert("Please select a road, enter chainage.");
 				return;
 			}
 
@@ -962,51 +970,7 @@
 		const addAssetBtn = document.getElementById("addAssetBtn");
 		const assetTableBody = document.querySelector("#assetTable tbody");
 
-		// addAssetBtn.addEventListener("click", () => {
-		// 	const road = roadSelect.value;
-		// 	const culverts = Array.from(culvertSelect.selectedOptions).map(opt => opt.value);
-		// 	const bridges = Array.from(bridgeSelect.selectedOptions).map(opt => opt.value);
-		// 	const walls = Array.from(wallSelect.selectedOptions).map(opt => opt.value);
 
-		// 	if (!road || (culverts.length === 0 && bridges.length === 0 && walls.length === 0)) {
-		// 		alert("Please select a road and at least one sub-asset.");
-		// 		return;
-		// 	}
-
-		// 	const tr = document.createElement("tr");
-
-		// 	tr.innerHTML = `<td><input type="hidden" name="roads[]" value="${road}">${road}</td>
-		// 					<td>
-		// 					${culverts.map(c => `<input type="hidden" name="culverts_${road}[]" value="${c}">
-		// 					<span class="badge bg-info me-1">${c}</span>`).join('')}
-		// 					</td>
-		// 					<td>
-		// 					${bridges.map(b => `<input type="hidden" name="bridges_${road}[]" value="${b}">
-		// 					<span class="badge bg-warning text-dark me-1">${b}</span>`).join('')}
-		// 					</td>
-		// 					<td>
-		// 					${walls.map(w => `<input type="hidden" name="walls_${road}[]" value="${w}">
-		// 					<span class="badge bg-secondary me-1">${w}</span>`).join('')}
-		// 					</td>
-		// 					<td>
-		// 					<button type="button" class="btn btn-sm btn-danger deleteRowBtn">Delete</button>
-		// 					</td>
-		// 	  			`;
-
-		// 	assetTableBody.appendChild(tr);
-
-		// 	// Reset
-		// 	roadSelect.selectedIndex = 0;
-		// 	culvertSelect.selectedIndex = -1;
-		// 	bridgeSelect.selectedIndex = -1;
-		// 	wallSelect.selectedIndex = -1;
-		// });
-
-		// assetTableBody.addEventListener("click", function (e) {
-		// 	if (e.target.classList.contains("deleteRowBtn")) {
-		// 		e.target.closest("tr").remove();
-		// 	}
-		// });
 	</script>
 
 
