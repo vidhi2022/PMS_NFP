@@ -655,10 +655,28 @@
 							`;
 			document.querySelector('#upgradeScopeTable tbody').appendChild(row);
 
+			//######################
+			const roadName = document.getElementById("refUpgradeRoads").selectedOptions[0].text;
+			const titleElement = document.getElementById("newUpSubAssetTitle");
+			const currentText = titleElement.textContent;
+			const newRoadText = roadName;
+			alert(newRoadText);
+			// Avoid duplicate entries
+			if (!titleElement.textContent.includes(newRoadText)) {
+				titleElement.textContent = currentText.includes(":")
+					? currentText + `, ${newRoadText}`
+					: currentText + ` for Selected Road: ${newRoadText}`;
+			}
+			//######################
+
+
 			// Clear inputs
 			document.getElementById('upgrade_start_chainage').value = '';
 			document.getElementById('upgrade_end_chainage').value = '';
 			document.getElementById('refUpgradeRoads').selectedIndex = -1;
+
+
+
 		}
 
 		function addUpgradeSubAssets() {
@@ -726,6 +744,8 @@
 				referentialSection.style.display = "none";
 				maintenanceSection.style.display = "none";
 				assetPoolSection.style.display = "block";
+
+
 			}
 			else {
 				referentialSection.style.display = "block";
