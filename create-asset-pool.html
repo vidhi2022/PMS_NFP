@@ -84,16 +84,26 @@
       <div class="card mb-3">
         <div class="card-header">Choose Asset Creation Mode</div>
         <div class="card-body">
-          <div class="form-check form-check-inline">
-            <input checked="" class="form-check-input" id="mode2" name="asset_mode" type="radio" value="mode2" />
-            <label class="form-check-label" for="mode2">New Sub Assets On Existing Road</label>
+          <div class="row mb-2">
+            <div class="form-check form-check-inline col-md-3">
+              <input checked="" class="form-check-input" id="mode2" name="asset_mode" type="radio" value="mode2" />
+              <label class="form-check-label" for="mode2">New Sub Assets On Existing Road</label>
+            </div>
+            <div class="form-check form-check-inline col-md-3">
+              <input class="form-check-input" id="mode3" name="asset_mode" type="radio" value="mode3" />
+              <label class="form-check-label" for="mode3">Add New Road and Its Sub Assets</label>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" id="mode3" name="asset_mode" type="radio" value="mode3" />
-            <label class="form-check-label" for="mode3">Add New Road and Its Sub Assets</label>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Pool Tile</label>
+              <input class="form-control" id="poolTitle" type="text" />
+            </div>
           </div>
         </div>
       </div>
+
+
       <!-- Mode 2 -->
       <div class="section" id="section2">
         <div class="card mb-3">
@@ -111,7 +121,9 @@
                   <option value="RD005">RD005</option>
                 </select>
               </div>
-              <div class="col-md-6"><label class="form-label">Upload Shapefile (.shp)</label>
+              <div class="col-md-6"><label class="form-label">Upload Shapefile <label class="form-label fw-bold">Culvert
+                    Name</label>
+                  <input class="form-control" id="culvertName" type="text" />(.shp)</label>
                 <input class="form-control" type="file">
                 </input>
               </div>
@@ -151,10 +163,10 @@
                       <label class="form-label fw-bold">Start Chainage</label>
                       <input class="form-control" id="culvertStart" type="text" />
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                       <label class="form-label fw-bold">End Chainage</label>
                       <input class="form-control" id="culvertEnd" type="text" />
-                    </div>
+                    </div> -->
                     <div class="col-md-3">
                       <label class="form-label">Culvert Type</label>
                       <select class="form-select" id="culvertType">
@@ -197,10 +209,10 @@
                         <label class="form-label">Start Chainage</label>
                         <input class="form-control" id="bridgeStart" type="text" />
                       </div>
-                      <div class="col-md-1">
+                      <!-- <div class="col-md-1">
                         <label class="form-label">End Chainage</label>
                         <input class="form-control" id="bridgeEnd" type="text" />
-                      </div>
+                      </div> -->
                       <div class="col-md-3">
                         <label class="form-label">Span</label>
                         <input class="form-control" id="bridgeSpan" type="text" />
@@ -236,10 +248,10 @@
                       <label class="form-label">Start Chainage</label>
                       <input class="form-control" id="wallStart" type="text" />
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                       <label class="form-label">End Chainage</label>
                       <input class="form-control" id="wallEnd" type="text" />
-                    </div>
+                    </div> -->
                     <div class="col-md-1">
                       <label class="form-label">Height</label>
                       <input class="form-control" id="wallHeight" type="text" />
@@ -398,10 +410,10 @@
                       <label class="form-label fw-bold">Start Chainage</label>
                       <input class="form-control" id="culvertStart1" type="text" />
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                       <label class="form-label fw-bold">End Chainage</label>
                       <input class="form-control" id="culvertEnd1" type="text" />
-                    </div>
+                    </div> -->
                     <div class="col-md-1">
                       <label class="form-label">Culvert Type</label>
                       <select class="form-select" id="culvertType1">
@@ -446,10 +458,10 @@
                         <label class="form-label">Start Chainage</label>
                         <input class="form-control" id="bridgeStart1" type="text" />
                       </div>
-                      <div class="col-md-1">
+                      <!-- <div class="col-md-1">
                         <label class="form-label">End Chainage</label>
                         <input class="form-control" id="bridgeEnd1" type="text" />
-                      </div>
+                      </div> -->
                       <div class="col-md-2">
                         <label class="form-label">Span</label>
                         <input class="form-control" id="bridgeSpan1" type="text" />
@@ -487,10 +499,10 @@
                       <label class="form-label">Start Chainage</label>
                       <input class="form-control" id="wallStart1" type="text" />
                     </div>
-                    <div class="col-md-1">
+                    <!-- <div class="col-md-1">
                       <label class="form-label">End Chainage</label>
                       <input class="form-control" id="wallEnd1" type="text" />
-                    </div>
+                    </div> -->
                     <div class="col-md-2">
                       <label class="form-label">Height</label>
                       <input class="form-control" id="wallHeight1" type="text" />
@@ -554,14 +566,13 @@
                 </table>
               </div>
             </div>
-
-
           </div>
         </div>
-        <div class="text-end mb-4">
-          <button class="btn btn-secondary">Cancel</button>
-          <button class="btn btn-primary">Save</button>
-        </div>
+
+      </div>
+      <div class="text-end mb-4">
+        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-primary">Save</button>
       </div>
     </div>
   </form>
@@ -643,40 +654,39 @@
     function addCulvert() {
       const name = document.getElementById("culvertName").value;
       const start = document.getElementById("culvertStart").value;
-      const end = document.getElementById("culvertEnd").value;
+      const end = "x";
       const type = document.getElementById("culvertType").value;
-      if (!name || !start || !end) return alert("Fill all culvert fields.");
       const row = document.createElement("tr");
       row.innerHTML = `<td>${name}</td><td>${start}</td><td>${end}</td><td>${type}</td>
         <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
       document.querySelector("#culvertTable tbody").appendChild(row);
-      ['culvertName', 'culvertStart', 'culvertEnd', 'culvertType'].forEach(id => document.getElementById(id).value = '');
+      ['culvertName', 'culvertStart', 'culvertType'].forEach(id => document.getElementById(id).value = '');
     }
 
     function addBridge() {
       const name = document.getElementById("bridgeName").value;
       const start = document.getElementById("bridgeStart").value;
-      const end = document.getElementById("bridgeEnd").value;
+      const end = 'X';
       const span = document.getElementById("bridgeSpan").value;
-      if (!name || !start || !end) return alert("Fill all bridge fields.");
+      if (!name || !start) return alert("Fill all bridge fields.");
       const row = document.createElement("tr");
       row.innerHTML = `<td>${name}</td><td>${start}</td><td>${end}</td><td>${span}</td>
         <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
       document.querySelector("#bridgeTable tbody").appendChild(row);
-      ['bridgeName', 'bridgeStart', 'bridgeEnd', 'bridgeSpan'].forEach(id => document.getElementById(id).value = '');
+      ['bridgeName', 'bridgeStart', 'bridgeSpan'].forEach(id => document.getElementById(id).value = '');
     }
 
     function addWall() {
       const name = document.getElementById("wallName").value;
       const start = document.getElementById("wallStart").value;
-      const end = document.getElementById("wallEnd").value;
+      const end = 'X';
       const height = document.getElementById("wallHeight").value;
       if (!name || !start || !end) return alert("Fill all wall fields.");
       const row = document.createElement("tr");
       row.innerHTML = `<td>${name}</td><td>${start}</td><td>${end}</td><td>${height}</td>
         <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
       document.querySelector("#wallTable tbody").appendChild(row);
-      ['wallName', 'wallStart', 'wallEnd', 'wallHeight'].forEach(id => document.getElementById(id).value = '');
+      ['wallName', 'wallStart', 'wallHeight'].forEach(id => document.getElementById(id).value = '');
     }
 
     function addPvt() {
@@ -696,40 +706,40 @@
     function addCulvert1() {
       const name = document.getElementById("culvertName1").value;
       const start = document.getElementById("culvertStart1").value;
-      const end = document.getElementById("culvertEnd1").value;
+      const end = "x";
       const type = document.getElementById("culvertType1").value;
-      if (!name || !start || !end) return alert("Fill all culvert fields.");
+      if (!name || !start) return alert("Fill all culvert fields.");
       const row = document.createElement("tr");
       row.innerHTML = `<td>${name}</td><td>${start}</td><td>${end}</td><td>${type}</td>
         <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
       document.querySelector("#culvertTable1 tbody").appendChild(row);
-      ['culvertName1', 'culvertStart1', 'culvertEnd1', 'culvertType1'].forEach(id => document.getElementById(id).value = '');
+      ['culvertName1', 'culvertStart1', 'culvertType1'].forEach(id => document.getElementById(id).value = '');
     }
 
     function addBridge1() {
       const name = document.getElementById("bridgeName1").value;
       const start = document.getElementById("bridgeStart1").value;
-      const end = document.getElementById("bridgeEnd1").value;
+      const end = 'X';
       const span = document.getElementById("bridgeSpan1").value;
       if (!name || !start || !end) return alert("Fill all bridge fields.");
       const row = document.createElement("tr");
       row.innerHTML = `<td>${name}</td><td>${start}</td><td>${end}</td><td>${span}</td>
         <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
       document.querySelector("#bridgeTable1 tbody").appendChild(row);
-      ['bridgeName1', 'bridgeStart1', 'bridgeEnd1', 'bridgeSpan1'].forEach(id => document.getElementById(id).value = '');
+      ['bridgeName1', 'bridgeStart1', 'bridgeSpan1'].forEach(id => document.getElementById(id).value = '');
     }
 
     function addWall1() {
       const name = document.getElementById("wallName1").value;
       const start = document.getElementById("wallStart1").value;
-      const end = document.getElementById("wallEnd1").value;
+      const end = 'X';
       const height = document.getElementById("wallHeight1").value;
       if (!name || !start || !end) return alert("Fill all wall fields.");
       const row = document.createElement("tr");
       row.innerHTML = `<td>${name}</td><td>${start}</td><td>${end}</td><td>${height}</td>
         <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
       document.querySelector("#wallTable1 tbody").appendChild(row);
-      ['wallName1', 'wallStart1', 'wallEnd1', 'wallHeight1'].forEach(id => document.getElementById(id).value = '');
+      ['wallName1', 'wallStart1', 'wallHeight1'].forEach(id => document.getElementById(id).value = '');
     }
 
     function addPvt1() {
@@ -771,18 +781,18 @@
       row.className = "row g-2 mb-2 align-items-end";
 
       row.innerHTML = `
-      <div class="col-md-2">
-        <label class="form-label">Start Chainage</label>
-        <input type="text" name="start_chainage[]" class="form-control" />
-      </div>
-      <div class="col-md-2">
-        <label class="form-label">End Chainage</label>
-        <input type="text" name="end_chainage[]" class="form-control" />
-      </div>
-      <div class="col-md-2">
-        <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.row').remove()">❌</button>
-      </div>
-    `;
+                      <div class="col-md-2">
+                        <label class="form-label">Start Chainage</label>
+                        <input type="text" name="start_chainage[]" class="form-control" />
+                      </div>
+                      <div class="col-md-2">
+                        <label class="form-label">End Chainage</label>
+                        <input type="text" name="end_chainage[]" class="form-control" />
+                      </div>
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="this.closest('.row').remove()">❌</button>
+                      </div>
+                    `;
 
       container.appendChild(row);
     }
