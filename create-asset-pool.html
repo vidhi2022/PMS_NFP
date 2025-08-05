@@ -797,13 +797,11 @@
       container.appendChild(row);
     }
 
-
     document.getElementById("addToTableBtn").addEventListener("click", function () {
       const road = document.getElementById("roadSelect")?.value || "-";
       const culvert = document.getElementById("culvertSelect")?.value || "-";
       const bridge = document.getElementById("bridgeSelect")?.value || "-";
       const wall = document.getElementById("wallSelect")?.value || "-";
-
       const chainageRows = document.querySelectorAll("#chainage-container .row");
       const tableBody = document.querySelector("#selectedAssetTable tbody");
 
@@ -814,20 +812,18 @@
         if (start && end) {
           const tr = document.createElement("tr");
           tr.innerHTML = `
-        <td>${road}</td>
-        <td>${start}</td>
-        <td>${end}</td>
-        <td>${culvert}</td>
-        <td>${bridge}</td>
-        <td>${wall}</td>
-        <td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">❌</button></td>
-      `;
+                          <td>${road}</td>
+                          <td>${start}</td>
+                          <td>${end}</td>
+                          <td>${culvert}</td>
+                          <td>${bridge}</td>
+                          <td>${wall}</td>
+                          <td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove()">❌</button></td>
+                        `;
           tableBody.appendChild(tr);
         }
       });
     });
-
-
 
     // Load one row by default
     window.addEventListener("DOMContentLoaded", addChainageRow);
