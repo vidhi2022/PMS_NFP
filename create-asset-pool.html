@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Create Asset Pool</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
@@ -23,7 +24,6 @@
       display: none;
     }
   </style>
-
   <style>
     /* Compact form control styling */
     .form-control,
@@ -78,119 +78,30 @@
 
 <body>
   <form action="success_asset_pool.html" method="post">
-
-
     <div class="container py-3">
       <h2 class="text-center text-primary fw-bold">Create Pool of Assets</h2>
-
       <!-- Radio Buttons -->
       <div class="card mb-3">
         <div class="card-header">Choose Asset Creation Mode</div>
         <div class="card-body">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="asset_mode" id="mode1" value="mode1" checked>
-            <label class="form-check-label" for="mode1">Existing Road and Existing Sub Assets</label>
+            <input checked="" class="form-check-input" id="mode2" name="asset_mode" type="radio" value="mode2" />
+            <label class="form-check-label" for="mode2">New Sub Assets On Existing Road</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="asset_mode" id="mode2" value="mode2">
-            <label class="form-check-label" for="mode2">Existing Road and New Sub Assets</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="asset_mode" id="mode3" value="mode3">
-            <label class="form-check-label" for="mode3">New Road</label>
+            <input class="form-check-input" id="mode3" name="asset_mode" type="radio" value="mode3" />
+            <label class="form-check-label" for="mode3">Add New Road and Its Sub Assets</label>
           </div>
         </div>
       </div>
-
-      <!-- Mode 1 -->
-      <div id="section1" class="section">
-        <div class="card mb-3">
-          <div class="card-header">Select Existing Road</div>
-          <div class="card-body">
-            <div class="row mb-2">
-              <div class="col-md-3">
-                <label class="form-label">Road</label>
-                <select class="form-select" id="roadSelect">
-                  <option value="">--NA--</option>
-                  <option value="RD001">RD001</option>
-                  <option value="RD002">RD002</option>
-                  <option value="RD003">RD003</option>
-                  <option value="RD004">RD004</option>
-                  <option value="RD005">RD005</option>
-                </select>
-              </div>
-
-
-              <div class="col-md-2"><label class="form-label">Culvert</label>
-                <select class="form-select" id="culvertSelect">
-                  <option value="">--NA--</option>
-                  <option value="C0001">C0001</option>
-                  <option value="C0002">C0002</option>
-                  <option value="C0003">C0003</option>
-                  <option value="C0004">C0004</option>
-                  <option value="C0005">C0005</option>
-                </select>
-              </div>
-              <div class="col-md-2"><label class="form-label">Bridge</label>
-                <select class="form-select" id="bridgeSelect">
-                  <option value="">--NA--</option>
-                  <option value="B0001">B0001</option>
-                  <option value="B0002">B0002</option>
-                  <option value="B0003">B0003</option>
-                  <option value="B0004">B0004</option>
-                  <option value="B0005">B0005</option>
-                </select>
-              </div>
-              <div class="col-md-2"><label class="form-label">Retaining Wall</label>
-                <select class="form-select" id="wallSelect">
-                  <option value="">--NA--</option>
-                  <option value="W0001">W0001</option>
-                  <option value="W0002">W0002</option>
-                  <option value="W0003">W0003</option>
-                  <option value="W0004">W0004</option>
-                  <option value="W0005">W0005</option>
-                </select>
-              </div>
-              <div class="col-md-3">
-                <label class="form-label">Upload Shapefile (.shp)</label>
-                <input type="file" accept=".shp" class="form-control" />
-              </div>
-            </div>
-            <!-- Dynamic Chainage Section -->
-            <div class="card mt-3">
-              <div class="card-header">Chainage Sections</div>
-              <div class="card-body">
-                <div id="chainage-container"></div>
-                <button type="button" class="btn btn-sm btn-outline-primary" onclick="addChainageRow()">+ Add
-                  Chainage</button>
-              </div>
-            </div>
-            <button type="button" class="btn btn-success btn-sm mt-2" id="addToTableBtn">+ Add to Table</button>
-            <table class="table table-bordered table-sm mt-3" id="selectedAssetTable">
-              <thead>
-                <th>Road</th>
-                <th>Start Chainage</th>
-                <th>End Chainage</th>
-                <th>Culvert</th>
-                <th>Bridge</th>
-                <th>Retaining Wall</th>
-                <th>Action</th>
-              </thead>
-              <tbody>
-
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
       <!-- Mode 2 -->
-      <div id="section2" class="section">
+      <div class="section" id="section2">
         <div class="card mb-3">
           <div class="card-header">Existing Road With New Sub Assets</div>
           <div class="card-body">
             <div class="row mb-2">
-              <div class="col-md-6"><label class="form-label">Select Existing Road</label>
+              <div class="col-md-6">
+                <label class="form-label">Select Existing Road</label>
                 <select class="form-select" id="roadSelect">
                   <option value="">--NA--</option>
                   <option value="RD001">RD001</option>
@@ -201,89 +112,147 @@
                 </select>
               </div>
               <div class="col-md-6"><label class="form-label">Upload Shapefile (.shp)</label>
-                <input type="file" class="form-control" />
+                <input class="form-control" type="file">
+                </input>
               </div>
             </div>
-
-            <div class="card mb-3">
-              <div class="card-header">Proposed Culverts</div>
-              <div class="card-body">
-                <div class="row g-2 align-items-end mb-3" id="culvert-entry">
-                  <div class="col-md-3">
-                    <label class="form-label fw-bold">Culvert Name</label>
-                    <input type="text" class="form-control" id="culvertName">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label fw-bold">Start Chainage</label>
-                    <input type="text" class="form-control" id="culvertStart">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label fw-bold">End Chainage</label>
-                    <input type="text" class="form-control" id="culvertEnd">
-                  </div>
-                  <div class="col-md-3">
-                    <label class="form-label">Culvert Type</label>
-                    <select class="form-select" id="culvertType">
-                      <option value="">-- Select Type --</option>
-                      <option value="Box">Box</option>
-                      <option value="Pipe">Pipe</option>
-                      <option value="Slab">Slab</option>
-                      <option value="Arch">Arch</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  <div class="col-md-1">
-                    <button type="button" class="btn btn-success w-100" onclick="addCulvert()">+ Add</button>
-                  </div>
-                </div>
-
-                <table class="table table-bordered table-sm" id="culvertTable">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Start</th>
-                      <th>End</th>
-                      <th>Type</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
+            <label class="form-label d-block fw-bold">Select Sub Assets To Add:</label>
+            <div class="row mb-2">
+              <div class="form-check col-md-2">
+                <input class="form-check-input" id="chk_clv" name="subAsttype" type="checkbox" value="clv" />
+                <label class="form-check-label" for="chk_clv1">Culvert</label>
               </div>
-            </div>
+              <div class="form-check col-md-2">
+                <input class="form-check-input" id="chk_brg" name="subAsttype" type="checkbox" value="brg" />
+                <label class="form-check-label" for="chk_brg1">Bridge</label>
+              </div>
+              <div class="form-check col-md-2">
+                <input class="form-check-input" id="chk_rtw" name="subAsttype" type="checkbox" value="rtw" />
+                <label class="form-check-label" for="chk_rtw1">Retaining Wall</label>
+              </div>
+              <div class="form-check col-md-2">
+                <input class="form-check-input" id="chk_pvt" name="subAsttype" type="checkbox" value="pvt" />
+                <label class="form-check-label" for="chk_pvt1">Pavements</label>
+              </div>
 
-            <div class="card mb-3">
-              <div class="card-header">Proposed Bridge</div>
-              <div class="card-body">
-                <div class="row g-2 align-items-end mb-3" id="culvert-entry">
-                  <div class="row g-2 align-items-end mb-3">
+            </div>
+            <div class="row mb-2">
+              <div class="card mb-3" id="propCulvert">
+                <div class="card-header">Proposed Culverts</div>
+                <div class="card-body">
+                  <div class="row g-2 align-items-end mb-3" id="culvert-entry">
                     <div class="col-md-3">
-                      <label class="form-label">Bridge Name</label>
-                      <input type="text" class="form-control" id="bridgeName">
+                      <label class="form-label fw-bold">Culvert Name</label>
+                      <input class="form-control" id="culvertName" type="text" />
                     </div>
                     <div class="col-md-1">
-                      <label class="form-label">Start Chainage</label>
-                      <input type="text" class="form-control" id="bridgeStart">
+                      <label class="form-label fw-bold">Start Chainage</label>
+                      <input class="form-control" id="culvertStart" type="text" />
                     </div>
                     <div class="col-md-1">
-                      <label class="form-label">End Chainage</label>
-                      <input type="text" class="form-control" id="bridgeEnd">
+                      <label class="form-label fw-bold">End Chainage</label>
+                      <input class="form-control" id="culvertEnd" type="text" />
                     </div>
                     <div class="col-md-3">
-                      <label class="form-label">Span</label>
-                      <input type="text" class="form-control" id="bridgeSpan">
+                      <label class="form-label">Culvert Type</label>
+                      <select class="form-select" id="culvertType">
+                        <option value="">-- Select Type --</option>
+                        <option value="Box">Box</option>
+                        <option value="Pipe">Pipe</option>
+                        <option value="Slab">Slab</option>
+                        <option value="Arch">Arch</option>
+                        <option value="Other">Other</option>
+                      </select>
                     </div>
                     <div class="col-md-1">
-                      <button type="button" class="btn btn-success w-100" onclick="addBridge()">+ Add</button>
+                      <button class="btn btn-success w-100" onclick="addCulvert()" type="button">+ Add</button>
                     </div>
                   </div>
-                  <table class="table table-bordered table-sm" id="bridgeTable">
+                  <table class="table table-bordered table-sm" id="culvertTable">
                     <thead>
                       <tr>
                         <th>Name</th>
                         <th>Start</th>
                         <th>End</th>
-                        <th>Span</th>
+                        <th>Type</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card mb-3" id="propBridge">
+                <div class="card-header">Proposed Bridge</div>
+                <div class="card-body">
+                  <div class="row g-2 align-items-end mb-3" id="culvert-entry">
+                    <div class="row g-2 align-items-end mb-3">
+                      <div class="col-md-3">
+                        <label class="form-label">Bridge Name</label>
+                        <input class="form-control" id="bridgeName" type="text" />
+                      </div>
+                      <div class="col-md-1">
+                        <label class="form-label">Start Chainage</label>
+                        <input class="form-control" id="bridgeStart" type="text" />
+                      </div>
+                      <div class="col-md-1">
+                        <label class="form-label">End Chainage</label>
+                        <input class="form-control" id="bridgeEnd" type="text" />
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Span</label>
+                        <input class="form-control" id="bridgeSpan" type="text" />
+                      </div>
+                      <div class="col-md-1">
+                        <button class="btn btn-success w-100" onclick="addBridge()" type="button">+ Add</button>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-sm" id="bridgeTable">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Start</th>
+                          <th>End</th>
+                          <th>Span</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-3" id="propRtnWall">
+                <div class="card-header">Proposed Retaining Wall</div>
+                <div class="card-body">
+                  <div class="row g-2 align-items-end mb-3">
+                    <div class="col-md-3">
+                      <label class="form-label">Wall Name</label>
+                      <input class="form-control" id="wallName" type="text" />
+                    </div>
+                    <div class="col-md-1">
+                      <label class="form-label">Start Chainage</label>
+                      <input class="form-control" id="wallStart" type="text" />
+                    </div>
+                    <div class="col-md-1">
+                      <label class="form-label">End Chainage</label>
+                      <input class="form-control" id="wallEnd" type="text" />
+                    </div>
+                    <div class="col-md-1">
+                      <label class="form-label">Height</label>
+                      <input class="form-control" id="wallHeight" type="text" />
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn btn-success w-100" onclick="addWall()" type="button">+ Add</button>
+                    </div>
+                  </div>
+                  <table class="table table-bordered table-sm" id="wallTable">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Height</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -292,63 +261,25 @@
                 </div>
               </div>
             </div>
-
-
-            <div class="card mb-3">
-              <div class="card-header">Proposed Retaining Wall</div>
-              <div class="card-body">
-                <div class="row g-2 align-items-end mb-3">
-                  <div class="col-md-3">
-                    <label class="form-label">Wall Name</label>
-                    <input type="text" class="form-control" id="wallName">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label">Start Chainage</label>
-                    <input type="text" class="form-control" id="wallStart">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label">End Chainage</label>
-                    <input type="text" class="form-control" id="wallEnd">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label">Height</label>
-                    <input type="text" class="form-control" id="wallHeight">
-                  </div>
-                  <div class="col-md-1">
-                    <button type="button" class="btn btn-success w-100" onclick="addWall()">+ Add</button>
-                  </div>
-                </div>
-                <table class="table table-bordered table-sm" id="wallTable">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Start</th>
-                      <th>End</th>
-                      <th>Height</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-            </div>
           </div>
         </div>
-      </div>
+        <!-- Mode 3 -->
 
-      <!-- Mode 3 -->
-      <div id="section3" class="section">
+      </div>
+      <div class="section" id="section3">
         <div class="card mb-3">
           <div class="card-header">Proposed New Road and Sub Assets</div>
           <div class="card-body">
             <div class="row mb-2">
               <div class="col-md-3">
                 <label class="form-label">Road Name</label>
-                <input type="text" class="form-control" placeholder="Proposed Road Name" />
+                <input class="form-control" placeholder="Proposed Road Name" type="text">
+                </input>
               </div>
               <div class="col-md-2">
                 <label class="form-label">Road Length</label>
-                <input type="number" class="form-control" placeholder="Length (km)" />
+                <input class="form-control" placeholder="Length (km)" type="number">
+                </input>
               </div>
               <div class="col-md-2">
                 <label class="form-label">Road Category</label>
@@ -377,97 +308,77 @@
                 <select class="form-select" id="roadOwner">
                   <option value="">-- Select --</option>
                   <option value="PWD">PWD</option>
-                  <option value="RNB">Roads & Bridges</option>
+                  <option value="RNB">Roads &amp; Bridges</option>
                   <option value="HSG">National Highway</option>
                   <option value="MECH">State Highway</option>
                   <option value="LOCAL">Village Road</option>
                 </select>
               </div>
-            </div>
-            <div class="row mb-2">
-              <label class="form-label">New Road Shape File</label>
-              <div class="col-md-6"><input type="file" class="form-control" accept=".shp" /></div>
-            </div>
-            <h6 class="mt-3">Proposed Sub Assets</h6>
-            <div class="card mb-3">
-              <div class="card-header">Proposed Culverts</div>
-              <div class="card-body">
-                <div class="row g-2 align-items-end mb-3" id="culvert-entry">
-                  <div class="col-md-3">
-                    <label class="form-label fw-bold">Culvert Name</label>
-                    <input type="text" class="form-control" id="culvertName1">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label fw-bold">Start Chainage</label>
-                    <input type="text" class="form-control" id="culvertStart1">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label fw-bold">End Chainage</label>
-                    <input type="text" class="form-control" id="culvertEnd1">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label">Culvert Type</label>
-                    <select class="form-select" id="culvertType1">
-                      <option value="">-- Select Type --</option>
-                      <option value="Box">Box</option>
-                      <option value="Pipe">Pipe</option>
-                      <option value="Slab">Slab</option>
-                      <option value="Arch">Arch</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-                  <div class="col-md-1">
-                    <button type="button" class="btn btn-success w-100" onclick="addCulvert1()">+ Add</button>
-                  </div>
-                </div>
-
-                <table class="table table-bordered table-sm" id="culvertTable1">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Start</th>
-                      <th>End</th>
-                      <th>Type</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
+              <div class="row mb-2">
+                <label class="form-label">New Road Shape File</label>
+                <div class="col-md-6"><input accept=".shp" class="form-control" type="file" /></div>
               </div>
             </div>
 
-            <div class="card mb-3">
-              <div class="card-header">Proposed Bridge</div>
-              <div class="card-body">
-                <div class="row g-2 align-items-end mb-3" id="culvert-entry">
-                  <div class="row g-2 align-items-end mb-3">
+            <label class="form-label d-block fw-bold">Select Sub Assets To Add:</label>
+            <div class="row mb-2">
+              <div class="form-check col-md-2">
+                <input class="form-check-input" id="chk_clv1" name="subAsttype1" type="checkbox" value="clv" />
+                <label class="form-check-label" for="chk_clv1">Culvert</label>
+              </div>
+              <div class="form-check col-md-2">
+                <input class="form-check-input" id="chk_brg1" name="subAsttype1" type="checkbox" value="brg" />
+                <label class="form-check-label" for="chk_brg1">Bridge</label>
+              </div>
+              <div class="form-check col-md-2">
+                <input class="form-check-input" id="chk_rtw1" name="subAsttype1" type="checkbox" value="rtw" />
+                <label class="form-check-label" for="chk_rtw1">Retaining Wall</label>
+              </div>
+              <div class="form-check col-md-2">
+                <input class="form-check-input" id="chk_pvt1" name="subAsttype1" type="checkbox" value="pvt" />
+                <label class="form-check-label" for="chk_pvt1">Pavements</label>
+              </div>
+
+            </div>
+            <div class="row mb-2">
+              <div class="card mb-3" id="propCulvert1">
+                <div class="card-header">Proposed Culverts</div>
+                <div class="card-body">
+                  <div class="row g-2 align-items-end mb-3" id="culvert-entry">
                     <div class="col-md-3">
-                      <label class="form-label">Bridge Name</label>
-                      <input type="text" class="form-control" id="bridgeName1">
+                      <label class="form-label fw-bold">Culvert Name</label>
+                      <input class="form-control" id="culvertName1" type="text" />
                     </div>
                     <div class="col-md-1">
-                      <label class="form-label">Start Chainage</label>
-                      <input type="text" class="form-control" id="bridgeStart1">
+                      <label class="form-label fw-bold">Start Chainage</label>
+                      <input class="form-control" id="culvertStart1" type="text" />
                     </div>
                     <div class="col-md-1">
-                      <label class="form-label">End Chainage</label>
-                      <input type="text" class="form-control" id="bridgeEnd1">
-                    </div>
-                    <div class="col-md-2">
-                      <label class="form-label">Span</label>
-                      <input type="text" class="form-control" id="bridgeSpan1">
+                      <label class="form-label fw-bold">End Chainage</label>
+                      <input class="form-control" id="culvertEnd1" type="text" />
                     </div>
                     <div class="col-md-1">
-                      <button type="button" class="btn btn-success w-100" onclick="addBridge1()">+ Add</button>
+                      <label class="form-label">Culvert Type</label>
+                      <select class="form-select" id="culvertType1">
+                        <option value="">-- Select Type --</option>
+                        <option value="Box">Box</option>
+                        <option value="Pipe">Pipe</option>
+                        <option value="Slab">Slab</option>
+                        <option value="Arch">Arch</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn btn-success w-100" onclick="addCulvert1()" type="button">+ Add</button>
                     </div>
                   </div>
-                  <table class="table table-bordered table-sm" id="bridgeTable1">
+                  <table class="table table-bordered table-sm" id="culvertTable1">
                     <thead>
                       <tr>
                         <th>Name</th>
                         <th>Start</th>
                         <th>End</th>
-                        <th>Span</th>
+                        <th>Type</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -476,56 +387,170 @@
                 </div>
               </div>
             </div>
-
-
-            <div class="card mb-3">
-              <div class="card-header">Proposed Retaining Wall</div>
-              <div class="card-body">
-                <div class="row g-2 align-items-end mb-3">
-                  <div class="col-md-3">
-                    <label class="form-label">Wall Name</label>
-                    <input type="text" class="form-control" id="wallName1">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label">Start Chainage</label>
-                    <input type="text" class="form-control" id="wallStart1">
-                  </div>
-                  <div class="col-md-1">
-                    <label class="form-label">End Chainage</label>
-                    <input type="text" class="form-control" id="wallEnd1">
-                  </div>
-                  <div class="col-md-2">
-                    <label class="form-label">Height</label>
-                    <input type="text" class="form-control" id="wallHeight1">
-                  </div>
-                  <div class="col-md-1">
-                    <button type="button" class="btn btn-success w-100" onclick="addWall1()">+ Add</button>
+            <div class="row mb-2">
+              <div class="card mb-3" id="propBridge1">
+                <div class="card-header">Proposed Bridge</div>
+                <div class="card-body">
+                  <div class="row g-2 align-items-end mb-3" id="culvert-entry">
+                    <div class="row g-2 align-items-end mb-3">
+                      <div class="col-md-3">
+                        <label class="form-label">Bridge Name</label>
+                        <input class="form-control" id="bridgeName1" type="text" />
+                      </div>
+                      <div class="col-md-1">
+                        <label class="form-label">Start Chainage</label>
+                        <input class="form-control" id="bridgeStart1" type="text" />
+                      </div>
+                      <div class="col-md-1">
+                        <label class="form-label">End Chainage</label>
+                        <input class="form-control" id="bridgeEnd1" type="text" />
+                      </div>
+                      <div class="col-md-2">
+                        <label class="form-label">Span</label>
+                        <input class="form-control" id="bridgeSpan1" type="text" />
+                      </div>
+                      <div class="col-md-1">
+                        <button class="btn btn-success w-100" onclick="addBridge1()" type="button">+ Add</button>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-sm" id="bridgeTable1">
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Start</th>
+                          <th>End</th>
+                          <th>Span</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
                   </div>
                 </div>
-                <table class="table table-bordered table-sm" id="wallTable1">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Start</th>
-                      <th>End</th>
-                      <th>Height</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody></tbody>
-                </table>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="card mb-3" id="propRtnWall1">
+                <div class="card-header">Proposed Retaining Wall</div>
+                <div class="card-body">
+                  <div class="row g-2 align-items-end mb-3">
+                    <div class="col-md-3">
+                      <label class="form-label">Wall Name</label>
+                      <input class="form-control" id="wallName1" type="text" />
+                    </div>
+                    <div class="col-md-1">
+                      <label class="form-label">Start Chainage</label>
+                      <input class="form-control" id="wallStart1" type="text" />
+                    </div>
+                    <div class="col-md-1">
+                      <label class="form-label">End Chainage</label>
+                      <input class="form-control" id="wallEnd1" type="text" />
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-label">Height</label>
+                      <input class="form-control" id="wallHeight1" type="text" />
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn btn-success w-100" onclick="addWall1()" type="button">+ Add</button>
+                    </div>
+                  </div>
+                  <table class="table table-bordered table-sm" id="wallTable1">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Height</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="text-end mb-4">
-        <button class="btn btn-secondary">Cancel</button>
-        <button class="btn btn-primary">Save</button>
+        <div class="text-end mb-4">
+          <button class="btn btn-secondary">Cancel</button>
+          <button class="btn btn-primary">Save</button>
+        </div>
       </div>
     </div>
   </form>
+  <script>
+    function toggleSubAssetCardsFromCheckboxes(prefix = '') {
+      const checkboxes = document.querySelectorAll("input[name='subAsttype']:checked");
+      const selectedValues = Array.from(checkboxes).map(cb => cb.value);
+
+      const cards = {
+        clv: 'propCulvert',
+        brg: 'propBridge',
+        rtw: 'propRtnWall',
+        pvt: 'propPavement'
+      };
+
+      // Hide all asset cards first
+      Object.values(cards).forEach(cardId => {
+        const card = document.getElementById(cardId);
+        if (card) card.style.display = 'none';
+      });
+
+      // Show only selected asset cards
+      selectedValues.forEach(val => {
+        const cardId = cards[val];
+        const card = document.getElementById(cardId);
+        if (card) card.style.display = 'block';
+      });
+    }
+
+    // Attach change event to all sub asset checkboxes
+    document.querySelectorAll("input[name='subAsttype']").forEach(cb => {
+      cb.addEventListener('change', () => toggleSubAssetCardsFromCheckboxes());
+    });
+
+    // Initialize on page load (in case of pre-checked options)
+    window.addEventListener('DOMContentLoaded', () => {
+      toggleSubAssetCardsFromCheckboxes();
+    });
+  </script>
+
+  <script>
+    function toggleSubAssetCardsFromCheckboxes1(prefix = '') {
+      const checkboxes = document.querySelectorAll("input[name='subAsttype1']:checked");
+      const selectedValues = Array.from(checkboxes).map(cb => cb.value);
+
+      const cards = {
+        clv: 'propCulvert1',
+        brg: 'propBridge1',
+        rtw: 'propRtnWall1',
+        pvt: 'propPavement1'
+      };
+
+      // Hide all asset cards first
+      Object.values(cards).forEach(cardId => {
+        const card = document.getElementById(cardId);
+        if (card) card.style.display = 'none';
+      });
+
+      // Show only selected asset cards
+      selectedValues.forEach(val => {
+        const cardId = cards[val];
+        const card = document.getElementById(cardId);
+        if (card) card.style.display = 'block';
+      });
+    }
+
+    // Attach change event to all sub asset checkboxes
+    document.querySelectorAll("input[name='subAsttype1']").forEach(cb => {
+      cb.addEventListener('change', () => toggleSubAssetCardsFromCheckboxes1());
+    });
+
+    // Initialize on page load (in case of pre-checked options)
+    window.addEventListener('DOMContentLoaded', () => {
+      toggleSubAssetCardsFromCheckboxes1();
+    });
+  </script>
 
   <script>
     function addCulvert() {
@@ -567,8 +592,6 @@
       ['wallName', 'wallStart', 'wallEnd', 'wallHeight'].forEach(id => document.getElementById(id).value = '');
     }
   </script>
-
-
   <script>
     function addCulvert1() {
       const name = document.getElementById("culvertName1").value;
@@ -609,10 +632,8 @@
       ['wallName1', 'wallStart1', 'wallEnd1', 'wallHeight1'].forEach(id => document.getElementById(id).value = '');
     }
   </script>
-
   <script>
     const sections = {
-      mode1: document.getElementById("section1"),
       mode2: document.getElementById("section2"),
       mode3: document.getElementById("section3")
     };
@@ -628,7 +649,7 @@
     });
 
     // Initial load
-    showSection("mode1");
+    showSection("mode2");
 
     function addChainageRow() {
       const container = document.getElementById("chainage-container");

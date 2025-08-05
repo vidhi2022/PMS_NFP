@@ -142,7 +142,7 @@
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="ref_asset" id="rdoRoadWithSubAsset"
 									value="existing" checked />
-								<label class="form-check-label" for="rdoRoadWithSubAsset">Road and Sub Assets</label>
+								<label class="form-check-label" for="rdoRoadWithSubAsset">Road and/or Sub Assets</label>
 							</div>
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="radio" name="ref_asset" id="rdoSubAsset"
@@ -164,6 +164,25 @@
 									<option value="Rd0002">Rd0002</option>
 									<option value="Rd0003">Rd0003</option>
 								</select>
+							</div>
+
+							<!-- Scope Definition -->
+							<div class="card mt-4" style="max-width: 800px;">
+								<div class="card-header bg-light fw-semibold">Scope Definition</div>
+								<div class="card-body">
+									<div class="row align-items-end">
+										<div class="col-sm-4">
+											<label class="form-label">Start Chainage (in KM):</label>
+											<input type="text" name="txt_start_chainage" id="txt_start_chainage"
+												class="form-control form-control-sm" />
+										</div>
+										<div class="col-sm-4">
+											<label class="form-label">End Chainage (in KM):</label>
+											<input type="text" name="txt_end_chainage" id="txt_end_chainage"
+												class="form-control form-control-sm" />
+										</div>
+									</div>
+								</div>
 							</div>
 							<!-- Culverts -->
 							<div class="col-sm-2">
@@ -195,30 +214,25 @@
 									<option value="Wall C">Wall C</option>
 								</select>
 							</div>
+
+							<!-- Pavements -->
+							<div class="col-sm-2">
+								<label class="form-label">List of Pavements</label>
+								<select id="refPVSelect" class="form-control" multiple size="3">
+									<option value="">-- NA--</option>
+									<option value="Wall A">Pavement A</option>
+									<option value="Wall B">Pavement B</option>
+									<option value="Wall C">Pavement C</option>
+								</select>
+							</div>
+
 							<!-- Add Button -->
 							<div class="col-sm-1 d-flex justify-content-center align-items-center">
 								<button type="button" id="addRefAssetBtn" class="btn btn-success px-3 py-4">➕</button>
 							</div>
 						</div>
 
-						<!-- Scope Definition -->
-						<div class="card mt-4" style="max-width: 700px;">
-							<div class="card-header bg-light fw-semibold">Scope Definition</div>
-							<div class="card-body">
-								<div class="row align-items-end">
-									<div class="col-sm-3">
-										<label class="form-label">Start Chainage (in KM):</label>
-										<input type="text" name="txt_start_chainage" id="txt_start_chainage"
-											class="form-control form-control-sm" />
-									</div>
-									<div class="col-sm-3">
-										<label class="form-label">End Chainage (in KM):</label>
-										<input type="text" name="txt_end_chainage" id="txt_end_chainage"
-											class="form-control form-control-sm" />
-									</div>
-								</div>
-							</div>
-						</div>
+
 
 						<!-- Table -->
 						<div class="table-responsive mt-4">
@@ -343,13 +357,23 @@
 								<option value="RW002">Upgrade Wall B</option>
 							</select>
 						</div>
+
+						<!-- Pavements -->
+						<div class="col-sm-2">
+							<label class="form-label">List of Pavements</label>
+							<select id="upgradePV" class="form-control" multiple size="3">
+								<option value="">-- NA--</option>
+								<option value="Wall A">Pavement A</option>
+								<option value="Wall B">Pavement B</option>
+								<option value="Wall C">Pavement C</option>
+							</select>
+						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-3">
 							<button type="button" class="btn btn-success btn-sm w-100" onclick="addUpgradeSubAssets()">+
-								Add Sub
-								Assets</button>
+								Add Sub Assets</button>
 						</div>
 					</div>
 
@@ -399,6 +423,17 @@
 							<select class="form-select" id="maintWalls" multiple size="4">
 								<option value="RW001">Due Maintanence Wall A</option>
 								<option value="RW002">Due Maintanence Wall B</option>
+							</select>
+						</div>
+
+						<!-- Pavements -->
+						<div class="col-sm-2">
+							<label class="form-label">List of Pavements</label>
+							<select id="maintPv" class="form-control" multiple size="3">
+								<option value="">-- NA--</option>
+								<option value="Wall A">Pavement A</option>
+								<option value="Wall B">Pavement B</option>
+								<option value="Wall C">Pavement C</option>
 							</select>
 						</div>
 						<!-- Scope Definition -->
@@ -458,7 +493,7 @@
 							<div class="form-check form-check-inline">
 								<input class="form-check-input" type="checkbox" name="parent_asset_type[]"
 									id="assetPool" value="pool" />
-								<label class="form-check-label" for="assetPool">Create New Asset From Asset Pool</label>
+								<label class="form-check-label" for="assetPool">Add Asset From Asset Pool</label>
 							</div>
 						</div>
 					</div>
@@ -660,7 +695,6 @@
 			const titleElement = document.getElementById("newUpSubAssetTitle");
 			const currentText = titleElement.textContent;
 			const newRoadText = roadName;
-			alert(newRoadText);
 			// Avoid duplicate entries
 			if (!titleElement.textContent.includes(newRoadText)) {
 				titleElement.textContent = currentText.includes(":")
@@ -668,7 +702,6 @@
 					: currentText + ` for Selected Road: ${newRoadText}`;
 			}
 			//######################
-
 
 			// Clear inputs
 			document.getElementById('upgrade_start_chainage').value = '';
@@ -741,14 +774,12 @@
 				referentialSection.style.display = "none";
 				maintenanceSection.style.display = "none";
 				assetPoolSection.style.display = "block";
-
-
 			}
 			else {
 				referentialSection.style.display = "block";
 				assetPoolSection.style.display = "block";
 				maintenanceSection.style.display = "block";
-				newAssetUpgradeSection.style.display = "block";
+				newAssetUpgradeSection.style.display = "none";
 				upgradeSubAssetSection.style.display = "block";
 				referentialLabel.textContent = "Referential Asset Section";
 			}
