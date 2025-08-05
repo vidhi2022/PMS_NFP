@@ -116,7 +116,9 @@
                 </input>
               </div>
             </div>
-            <label class="form-label d-block fw-bold">Select Sub Assets To Add:</label>
+            <label class="form-label d-block fw-bold">
+              <h5>Choose Sub Assets To Add:</h5>
+            </label>
             <div class="row mb-2">
               <div class="form-check col-md-2">
                 <input class="form-check-input" id="chk_clv" name="subAsttype" type="checkbox" value="clv" />
@@ -260,6 +262,47 @@
                   </table>
                 </div>
               </div>
+
+              <div class="card mb-3" id="propPavement">
+                <div class="card-header">Proposed Pavement</div>
+                <div class="card-body">
+                  <div class="row g-2 align-items-end mb-3" id="culvert-entry">
+                    <div class="col-md-3">
+                      <label class="form-label fw-bold">Pavement Type</label>
+                      <select class="form-select" id="pvType">
+                        <option value="">-- Select Type --</option>
+                        <option value="Flexible Pavement">Flexible</option>
+                        <option value="Rigid Pavement">Rigid</option>
+
+                      </select>
+                    </div>
+                    <div class="col-md-1">
+                      <label class="form-label fw-bold">Foundation Width</label>
+                      <input class="form-control" id="fndWidth" type="text" />
+                    </div>
+                    <div class="col-md-1">
+                      <label class="form-label fw-bold">Carriage Width</label>
+                      <input class="form-control" id="crgWidth" type="text" />
+                    </div>
+
+                    <div class="col-md-1">
+                      <button class="btn btn-success w-100" onclick="addPvt()" type="button">+ Add</button>
+                    </div>
+                  </div>
+                  <table class="table table-bordered table-sm" id="pvtTable">
+                    <thead>
+                      <tr>
+                        <th>Pavement Type</th>
+                        <th>Foundation Width</th>
+                        <th>Carriage Width</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -320,7 +363,9 @@
               </div>
             </div>
 
-            <label class="form-label d-block fw-bold">Select Sub Assets To Add:</label>
+            <label class="form-label d-block fw-bold">
+              <h5>Choose Sub Assets To Add:</h5>
+            </label>
             <div class="row mb-2">
               <div class="form-check col-md-2">
                 <input class="form-check-input" id="chk_clv1" name="subAsttype1" type="checkbox" value="clv" />
@@ -469,6 +514,48 @@
                 </div>
               </div>
             </div>
+
+            <div class="card mb-3" id="propPavement1">
+              <div class="card-header">Proposed Pavement</div>
+              <div class="card-body">
+                <div class="row g-2 align-items-end mb-3" id="culvert-entry">
+                  <div class="col-md-3">
+                    <label class="form-label fw-bold">Pavement Type</label>
+                    <select class="form-select" id="pvType1">
+                      <option value="">-- Select Type --</option>
+                      <option value="Flexible">Flexible</option>
+                      <option value="Rigid">Rigid</option>
+
+                    </select>
+                  </div>
+                  <div class="col-md-1">
+                    <label class="form-label fw-bold">Foundation Width</label>
+                    <input class="form-control" id="fndWidth1" type="text" />
+                  </div>
+                  <div class="col-md-1">
+                    <label class="form-label fw-bold">Carriage Width</label>
+                    <input class="form-control" id="crgWidth1" type="text" />
+                  </div>
+
+                  <div class="col-md-1">
+                    <button class="btn btn-success w-100" onclick="addPvt1()" type="button">+ Add</button>
+                  </div>
+                </div>
+                <table class="table table-bordered table-sm" id="pvtTable1">
+                  <thead>
+                    <tr>
+                      <th>Pavement Type</th>
+                      <th>Foundation Width</th>
+                      <th>Carriage Width</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+
+
           </div>
         </div>
         <div class="text-end mb-4">
@@ -591,6 +678,19 @@
       document.querySelector("#wallTable tbody").appendChild(row);
       ['wallName', 'wallStart', 'wallEnd', 'wallHeight'].forEach(id => document.getElementById(id).value = '');
     }
+
+    function addPvt() {
+      const pvType = document.getElementById("pvType").value;
+      const fndWidth = document.getElementById("fndWidth").value;
+      const crgWidth = document.getElementById("crgWidth").value;
+
+      if (!pvType || !fndWidth || !crgWidth) return alert("Fill all Pavement fields.");
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${pvType}</td><td>${fndWidth}</td><td>${crgWidth}</td>
+        <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
+      document.querySelector("#pvtTable tbody").appendChild(row);
+      ['pvType', 'fndWidth', 'crgWidth'].forEach(id => document.getElementById(id).value = '');
+    }
   </script>
   <script>
     function addCulvert1() {
@@ -630,6 +730,19 @@
         <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
       document.querySelector("#wallTable1 tbody").appendChild(row);
       ['wallName1', 'wallStart1', 'wallEnd1', 'wallHeight1'].forEach(id => document.getElementById(id).value = '');
+    }
+
+    function addPvt1() {
+      const pvType1 = document.getElementById("pvType1").value;
+      const fndWidth1 = document.getElementById("fndWidth1").value;
+      const crgWidth1 = document.getElementById("crgWidth1").value;
+
+      if (!pvType1 || !fndWidth1 || !crgWidth1) return alert("Fill all Pavement fields.");
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${pvType1}</td><td>${fndWidth1}</td><td>${crgWidth1}</td>
+        <td><button class='btn btn-danger btn-sm' onclick='this.closest("tr").remove()'>❌</button></td>`;
+      document.querySelector("#pvtTable1 tbody").appendChild(row);
+      ['pvType1', 'fndWidth1', 'crgWidth1'].forEach(id => document.getElementById(id).value = '');
     }
   </script>
   <script>
