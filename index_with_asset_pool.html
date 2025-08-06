@@ -71,102 +71,67 @@
 		</div>
 		<form action="success.html" method="GET" enctype="multipart/form-data">
 			<!-- Project Information -->
-			<div class="row">
-				<div class="col-md-8">
-					<div class="card mb-2">
-						<div class="card-header bg-light fw-semibold">Project Information</div>
-						<div class="card-body">
-							<div class="row g-2">
-								<div class="col-sm-3">
-									<label class="form-label">Project Type</label>
-									<select name="projectTypeSelect" id="projectTypeSelect" class="form-select"
-										required>
-										<option value="">-- Select --</option>
-										<option value="NEW">New Work</option>
-										<option value="UPG">Upgradation</option>
-										<option value="MTN">Maintenance</option>
-										<option value="NWNUP">New Work and Upgradation</option>
-									</select>
-								</div>
-
-
-								<div class="col-sm-3">
-									<label class="form-label">Project Name</label>
-									<input type="text" name="project_name" class="form-control" required />
-								</div>
-								<div class="col-sm-3">
-									<label class="form-label">Owner Department</label>
-									<select name="owner_dept_cd" class="form-select" required>
-										<option value="">-- Select Department --</option>
-										<option value="RNB">Road & Bridge</option>
-										<option value="HSG">Housing</option>
-										<option value="MECH">Mechanical</option>
-									</select>
-								</div>
-								<div class="col-sm-3">
-									<label class="form-label">Division Code</label>
-									<select name="division_cd" class="form-select">
-										<option value="">-- Select Division --</option>
-										<option value="RNB">Div I</option>
-										<option value="HSG">Div II</option>
-										<option value="MECH">Div III</option>
-									</select>
-								</div>
-								<div class="col-sm-3">
-									<label class="form-label">Project Start Date</label>
-									<input type="date" name="project_start_date" class="form-control" />
-								</div>
-								<div class="col-sm-3">
-									<label class="form-label">Stipulated End Date</label>
-									<input type="date" name="project_end_date" class="form-control" />
-								</div>
-
-								<div class="col-sm-3">
-									<label class="form-label">Project Awarded To</label>
-									<select name="project_awarded_to" class="form-select">
-										<option value="">-- Select Constructor --</option>
-										<option value="RNB">M/s K. Nakhro & Sons</option>
-										<option value="HSG">M/s LPSS</option>
-										<option value="MECH">Naga Construction</option>
-									</select>
-								</div>
-							</div>
+			<div class="card mb-2">
+				<div class="card-header bg-light fw-semibold">Project Information</div>
+				<div class="card-body">
+					<div class="row g-2">
+						<div class="col-sm-3">
+							<label class="form-label">Project Type</label>
+							<select name="projectTypeSelect" id="projectTypeSelect" class="form-select" required>
+								<option value="">-- Select --</option>
+								<option value="NEW">New Asset Creation</option>
+								<option value="UPG">Upgradation</option>
+								<option value="MTN">Maintenance</option>
+								<option value="NWNUP">New Asset and Upgradation</option>
+							</select>
 						</div>
-					</div>
-				</div>
 
-				<div class="col-md-4">
-					<div class="card">
-						<div class="card-header bg-light fw-semibold">Remarks Section</div>
-						<input type="hidden" id="hdnProjInfoSection" value="project information" />
-						<div class="card-body">
-							<div class="mb-2">
-								<textarea name="remarks" id="remarks" rows="4" class="form-control"
-									placeholder="Write your remarks here..."></textarea>
-							</div>
-							<div class="row">
-								<div class="col-sm-3">
-									<button type="button" class="btn btn-primary btn-sm"
-										onclick="saveRemarks()">Save</button>
-								</div>
 
-								<div class="col-sm-9">
-									<div id="successMessage" style="display: none; color: #05790b;">
-										Remarks Saved Successfully!
-									</div>
-									<div id="errorMessage" style="display: none; color: #da0505;">
-										Error Saving Remarks.
-									</div>
-								</div>
-
-							</div>
-
+						<div class="col-sm-3">
+							<label class="form-label">Project Name</label>
+							<input type="text" name="project_name" class="form-control" required />
 						</div>
+						<div class="col-sm-3">
+							<label class="form-label">Owner Department</label>
+							<select name="owner_dept_cd" class="form-select" required>
+								<option value="">-- Select Department --</option>
+								<option value="RNB">Road & Bridge</option>
+								<option value="HSG">Housing</option>
+								<option value="MECH">Mechanical</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<label class="form-label">Division Code</label>
+							<select name="division_cd" class="form-select">
+								<option value="">-- Select Division --</option>
+								<option value="RNB">Div I</option>
+								<option value="HSG">Div II</option>
+								<option value="MECH">Div III</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<label class="form-label">Project Start Date</label>
+							<input type="date" name="project_start_date" class="form-control" />
+						</div>
+						<div class="col-sm-3">
+							<label class="form-label">Project End Date</label>
+							<input type="date" name="project_end_date" class="form-control" />
+						</div>
+
+						<div class="col-sm-3">
+							<label class="form-label">Project Awarded To</label>
+							<select name="project_awarded_to" class="form-select">
+								<option value="">-- Select Constructor --</option>
+								<option value="RNB">M/s K. Nakhro & Sons</option>
+								<option value="HSG">M/s LPSS</option>
+								<option value="MECH">Naga Construction</option>
+							</select>
+						</div>
+
+
 					</div>
 				</div>
 			</div>
-
-
 
 			<div class="card mb-2" id="referentialAssetSection">
 				<div class="card-header bg-light fw-semibold" id="referentialAssetLabel">Referential Asset Section</div>
@@ -514,6 +479,59 @@
 				</div>
 			</div>
 
+			<!-- Parent Asset Selection -->
+			<div class="card mb-2" id="assetPoolSection">
+				<div class="card-header bg-light fw-semibold">Asset Pool Section</div>
+				<div class="card-body">
+					<div class="row mb-3">
+						<div class="col-sm-12">
+							<!-- <div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" name="parent_asset_type[]"
+									id="existingAsset" value="existing" checked />
+								<label class="form-check-label" for="existingAsset">Existing Road and Sub Assets</label>
+							</div> -->
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" name="parent_asset_type[]"
+									id="assetPool" value="pool" />
+								<label class="form-check-label" for="assetPool">Add Asset From Asset Pool</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- If Existing Road is selected -->
+
+					<!-- If Asset Pool is selected -->
+					<div id="assetPoolFields" style="display: none;">
+						<div class="row g-3">
+							<div class="col-sm-3">
+								<label class="form-label">Select from Asset Pool</label>
+								<select name="asset_pool" class="form-select">
+									<option value="">-- Select Asset --</option>
+									<option value="AP001">Asset Pool 001</option>
+									<option value="AP002">Asset Pool 002</option>
+									<option value="AP003">Asset Pool 003</option>
+								</select>
+							</div>
+							<div class="col-sm-3 d-flex align-items-end">
+								<a href="create-asset-pool.html" class="btn btn-outline-primary">
+									➕ Create New Asset Pool
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12 mt-3" id="assetPoolDetails" style="display: none;">
+					<div class="card">
+						<div class="card-header bg-info text-white fw-bold">Selected Asset Pool Details</div>
+						<div class="card-body p-2" id="assetPoolDetailsContent">
+							<!-- Dynamic content will be injected here -->
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 			<!-- Site Incharge Details -->
 			<div class="card mb-2">
 				<div class="card-header bg-light fw-semibold">Site Incharge Details</div>
@@ -649,55 +667,6 @@
 		</form>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-	<script>
-		function saveRemarks() {
-			const section = document.getElementById('hdnProjInfoSection').value;
-			const remarks = document.getElementById('remarks').value.trim();
-			const successMessage = document.getElementById('successMessage');
-			const errorMessage = document.getElementById('errorMessage');
-
-			// Hide old messages
-			successMessage.style.display = 'none';
-			errorMessage.style.display = 'none';
-
-			if (!remarks) {
-				errorMessage.textContent = 'Please write some remarks.';
-				errorMessage.style.display = 'block';
-				return;
-			}
-
-			// Get current date and time
-			const now = new Date();
-			const formattedDate = now.toLocaleString('en-GB'); // e.g., 05/08/2025, 14:20:00
-
-			const fullRemark = `${section}: ${formattedDate}: ${remarks}`;
-
-			fetch('save_remarks.php', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
-				body: `remarks=${encodeURIComponent(fullRemark)}`
-			})
-				.then(response => {
-					if (!response.ok) {
-						throw new Error('Network response was not ok');
-					}
-					return response.text();
-				})
-				.then(data => {
-					successMessage.style.display = 'block';
-					document.getElementById('remarks').value = '';
-				})
-				.catch(error => {
-					console.error('Error saving remarks:', error);
-					errorMessage.style.display = 'block';
-				});
-		}
-	</script>
-
-
 	<script>
 
 		// Add Scope Entries to Table
@@ -770,6 +739,7 @@
 		const projectTypeSelect = document.getElementById("projectTypeSelect");
 		const referentialSection = document.getElementById("referentialAssetSection");
 		const referentialLabel = document.getElementById("referentialAssetLabel");
+		const assetPoolSection = document.getElementById("assetPoolSection");
 		const maintenanceSection = document.getElementById("maintenanceSection");
 		const newAssetUpgradeSection = document.getElementById("newAssetUpgradeSection");
 		const upgradeSubAssetSection = document.getElementById("upgradeSubAssetSection");
@@ -779,18 +749,21 @@
 
 			if (selected === "NEW") { // New Asset Creation
 				referentialSection.style.display = "none";
+				assetPoolSection.style.display = "block";
 				maintenanceSection.style.display = "none";
 				newAssetUpgradeSection.style.display = "none";
 				upgradeSubAssetSection.style.display = "none";
 				referentialLabel.textContent = "Referential Asset Section";
 			} else if (selected === "UPG") { // Upgradation
 				referentialSection.style.display = "block";
+				assetPoolSection.style.display = "none";
 				maintenanceSection.style.display = "none";
 				newAssetUpgradeSection.style.display = "none";
 				upgradeSubAssetSection.style.display = "none";
 				referentialLabel.textContent = "Select Asset for Upgradation";
 			} else if (selected === "MTN") { // Maintenance
 				referentialSection.style.display = "none";
+				assetPoolSection.style.display = "none";
 				maintenanceSection.style.display = "block";
 				newAssetUpgradeSection.style.display = "none";
 				upgradeSubAssetSection.style.display = "none";
@@ -800,9 +773,11 @@
 				upgradeSubAssetSection.style.display = "block";
 				referentialSection.style.display = "none";
 				maintenanceSection.style.display = "none";
+				assetPoolSection.style.display = "block";
 			}
 			else {
 				referentialSection.style.display = "block";
+				assetPoolSection.style.display = "block";
 				maintenanceSection.style.display = "block";
 				newAssetUpgradeSection.style.display = "none";
 				upgradeSubAssetSection.style.display = "block";
